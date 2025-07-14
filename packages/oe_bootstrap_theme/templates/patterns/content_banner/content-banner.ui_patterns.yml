@@ -1,0 +1,66 @@
+content_banner:
+  label: 'Content banner'
+  description: 'Shows the content summary along with the title, image and badges.'
+  fields:
+    background:
+      type: string
+      label: 'Background'
+      description: 'Set a gray or white background at the content banner. Defaults to white.'
+      escape: false
+      preview: 'gray'
+    image:
+      type: ImageValueObject
+      label: 'Image'
+      description: 'Image of the content.'
+      preview:
+        src: 'https://picsum.photos/255/255/'
+        alt: 'Alternative text for content banner image'
+    image_size:
+      type: text
+      label: 'Image size'
+      description: 'The size of the images. Allowed values: md, lg, xl. Defaults to lg.'
+    title:
+      type: text
+      label: 'Title'
+      description: 'Title of the content banner.'
+      preview: 'This is the title of this page.'
+    title_tag:
+      type: text
+      label: 'Title tag'
+      description: 'The tag to use for the title. Defaults to h1.'
+    action_bar:
+      type: render
+      label: 'Action bar region'
+      description: 'Action bar region. E.g. for action buttons.'
+      preview: '<div class="d-flex justify-content-end mt-2 align-items-center col-lg-11"><button class="w-auto me-3 btn btn-outline-primary btn-md" type="button">Submit</button></div>'
+    content:
+      type: text
+      label: 'Content'
+      description: 'Text with the summary of the content.'
+      preview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat ultricies massa, a dapibus libero porta nec. Sed facilisis dictum vestibulum. Fusce commodo hendrerit diam, pretium tempus leo varius sit amet. Etiam interdum, orci at sagittis luctus, lorem libero tempus mauris, a fermentum libero orci semper lacus. Duis tristique fringilla magna, eu egestas dolor molestie non.'
+    meta:
+      type: array
+      label: 'Meta'
+      description: 'Miscellaneous information as date, author, etc.'
+      preview:
+        - '26 May 2020'
+        - '1 comment'
+    badges:
+      type: array
+      label: 'Badges'
+      description: 'List of badges.'
+      preview:
+        - label: 'Primary badge'
+          rounded_pill: true
+          outline: false
+        - label: 'Secondary badge'
+          rounded_pill: true
+    links:
+      type: array
+      label: 'Links'
+      description: 'List of links.'
+      preview:
+        - label: 'Link 1'
+          path: "/example-1.html"
+        - label: 'Link 2'
+          path: "/example-2.html"

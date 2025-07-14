@@ -1,0 +1,77 @@
+card:
+  label: 'Card'
+  description: 'A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content, contextual background colors, and powerful display options. For more information: https://v5.getbootstrap.com/docs/5.0/components/card'
+  variants:
+    default:
+      label: 'Default'
+      description: 'Standard bootstrap card.'
+    search:
+      label: 'Search'
+      description: 'Card with special behaviour for print search results items.'
+  fields:
+    orientation:
+      type: string
+      label:  'Orientation'
+      description: 'Can be set to horizontal or vertical. Defaults to vertical.'
+    title:
+      type: text
+      label: 'Title'
+      description: 'Title of the card.'
+      preview: 'This is the title of this card.'
+    title_tag:
+      type: text
+      label: 'Title tag'
+      description: 'Title tag of the card. Defaults to h1.'
+    subtitle:
+      type: text
+      label: 'Subtitle'
+      description: 'Card subtitle.'
+      preview: 'Subtitle card'
+    text:
+      type: text
+      label: 'Text'
+      description: 'Card text.'
+      preview: 'Text card with longer text which is supported'
+    image:
+      type: ImageValueObject
+      label: 'Image'
+      description: 'Image for the card. Optional.'
+      preview:
+        src: 'https://picsum.photos/1000/500/'
+        alt: 'Alternative text for card image'
+    date:
+      type: array
+      label: 'Date block'
+      description: 'If set, presents a date block that uses the same parameters as the bcl date-block pattern. Optional.'
+    meta:
+      type: array
+      label: 'Meta items'
+      description: 'Date or other meta information.'
+      preview:
+        - 'Organisation'
+        - 'Position'
+    content:
+      type: render
+      label: 'Content'
+      description: 'Card content.'
+      preview: '<button class="btn btn-primary">Custom action</button>'
+    header:
+      type: text
+      label: 'Card header'
+      description: 'Card header content.'
+      preview: 'Header of card'
+    footer:
+      type: text
+      label: 'Card footer'
+      description: 'Card footer content.'
+      preview: 'Footer of card'
+    badges:
+      type: array
+      label: 'Badges'
+      description: 'List of badges for the card.'
+      preview:
+        - label: 'A badge'
+        - label: 'A non-rounded badge'
+          rounded_pill: false
+        - label: 'A solid badge'
+          outline: false

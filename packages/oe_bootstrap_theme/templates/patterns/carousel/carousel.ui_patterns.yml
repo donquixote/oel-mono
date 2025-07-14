@@ -1,0 +1,70 @@
+carousel:
+  label: 'Carousel'
+  description: 'A slideshow component for cycling through elements, like a carousel. For more information: https://v5.getbootstrap.com/docs/5.0/components/carousel/'
+  settings:
+    fade:
+      type: boolean
+      label: 'Fade'
+      description: 'Animate slides with a fade transition instead of a slide. Defaults to false.'
+      preview: true
+    show_controls:
+      type: boolean
+      label: 'Show controls'
+      description: 'Enable the controls (prev and next buttons). Defaults to false.'
+      preview: true
+    show_indicators:
+      type: boolean
+      label: 'Show indicators'
+      description: 'With indicators (default: false).'
+      preview: true
+    autoplay:
+      type: boolean
+      label: 'Disable autoplay'
+      description: 'Whether to initialise and animate the carousel at page load. Defaults to true. If false, the carousel will need to be instantiated explicitly via JavaScript.'
+      preview: true
+    autoinit:
+      type: boolean
+      label: 'initialize the carousel'
+      description: 'DEPRECATED in favour of autoplay. Whether to initialise and animate the carousel at page load. Its value will be used only if autoplay is not present.'
+    disable_touch:
+      type: boolean
+      label: 'Disable touch'
+      description: 'Allow the carousel to swipe on touch. Defaults to false.'
+    dark_mode:
+      type: boolean
+      label: 'Dark mode'
+      description: 'Enable the dark mode. Defaults to false.'
+      preview: false
+  fields:
+    title:
+      type: text
+      label: 'Title'
+      description: 'Title of the carousel.'
+      preview: 'This is the title of this carousel.'
+    title_tag:
+      type: text
+      label: 'Title tag'
+      description: 'The tag to use for the title. Defaults to h2.'
+    slides:
+      type: array
+      label: 'Slides'
+      description: 'Each slide is an image, a caption and interval of slide movement.'
+      preview:
+        - caption: 'First slide caption'
+          caption_title: 'First slide title'
+          interval: 0
+          image:
+            src: 'https://picsum.photos/1000/500/'
+            alt: 'alt image 1'
+          link:
+            label: First link
+            path: https://link.one
+        - caption: 'Second slide caption'
+          caption_title: 'Second slide title'
+          interval: 0
+          image:
+            src: 'https://picsum.photos/1000/500/'
+            alt: 'alt image 1'
+          link:
+            label: Second link
+            path: https://link.two

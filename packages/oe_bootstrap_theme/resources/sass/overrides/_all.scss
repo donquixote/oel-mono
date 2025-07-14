@@ -1,0 +1,23 @@
+// Import drupal overrides that will be shared with the sub themes
+// -----------------------------------------------------------------------------
+@import 'toolbar';
+@import 'table';
+@import 'inpage_navigation';
+@import 'js_throbbler';
+
+button.link {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  font-size: 1em;
+  text-decoration: underline;
+  appearance: none;
+}
+
+// Avoid z-index clashing between BCL components and Webtools Cookie Consent Kit.
+body .cck-container {
+  z-index: 9999 !important;
+}

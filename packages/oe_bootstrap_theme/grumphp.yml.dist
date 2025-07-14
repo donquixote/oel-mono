@@ -1,0 +1,9 @@
+imports:
+  - { resource: ./vendor/openeuropa/code-review-drupal/dist/oe-component-conventions.yml }
+grumphp:
+  tasks:
+    phpparser:
+      ignore_patterns:
+        - vendor/
+  git_hook_variables:
+    EXEC_GRUMPHP_COMMAND: 'docker-compose exec -T web'

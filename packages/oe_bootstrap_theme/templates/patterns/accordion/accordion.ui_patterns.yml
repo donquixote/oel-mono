@@ -1,0 +1,41 @@
+accordion:
+  label: 'Accordion'
+  description: 'List of items that can be clicked to hide or reveal additional content. For more information: https://getbootstrap.com/docs/5.0/components/accordion/'
+  settings:
+    bare_layout:
+      type: boolean
+      label: 'Bare layout'
+      description: 'Enable to remove the default background-color, some borders, and some rounded corners printing the accordion edge-to-edge with their parent container. Defaults to false.'
+      preview: false
+    open_item:
+      type: number
+      label: 'Accordion item opened by default'
+      description: 'Index value of the item to open (starting from 1), all closed by default (0).'
+      preview: 1
+  fields:
+    title:
+      type: text
+      label: 'Title'
+      description: 'Title of the accordion.'
+      preview: 'This is the title of this accordion.'
+    title_tag:
+      type: text
+      label: 'Title tag'
+      description: 'The tag to use for the title. Defaults to h2.'
+    expand_button_label:
+      type: text
+      label: 'Expand button'
+      description: 'Label of the expand button.'
+    collapse_button_label:
+      type: text
+      label: 'Collapse button'
+      description: 'Label of the collapse button.'
+    items:
+      type: array
+      label: 'Accordion items'
+      description: 'List of accordion items.'
+      preview:
+        - title: 'Jobs, Growth, Investment and Competitiveness with an additional quite long string'
+          content: 'Lorem fistrum eiusmod cillum elit papaar officia aliquip dolore velit. Pellentesque dolor sapien, mollis fringilla ultricies sed, lacinia vel nibh. Nulla auctor arcu risus, nec facilisis odio aliquet sed.'
+        - title: 'Energy Union'
+          content: 'Advice on living, working or travelling in the EU, on visas and immigration for non-EU citizens, European culture. Plus some extra text to make it a little bit longer.'

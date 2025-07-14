@@ -1,0 +1,46 @@
+offcanvas:
+  label: 'Offcanvas'
+  description: 'Hidden sidebar with activation. For more information visit: https://getbootstrap.com/docs/5.0/components/offcanvas/'
+  variants:
+    default:
+      label: 'Default'
+    search:
+      label: 'Search'
+  settings:
+    placement:
+      type: select
+      label: 'Offcanvas'
+      description: 'Select the placement of the offcanvas:'
+      options:
+        start: 'start'
+        end: 'end'
+        top: 'top'
+        bottom: 'bottom'
+      preview: 'start'
+    body_scroll:
+      type: boolean
+      label: 'Scroll'
+      description: 'If true, enable body scrolling when offcanvas is displayed. Defaults to false.'
+    backdrop:
+      type: boolean
+      label: 'Backdrop'
+      description: 'If true, enable backdrop behind offcanvas. Defaults to false.'
+      preview: true
+  fields:
+    title:
+      type: text
+      label: 'Title'
+      description: 'Offcanvas title.'
+      preview: 'An offcanvas title'
+    body:
+      type: text
+      label: 'Body'
+      description: 'Offcanvas body content.'
+      preview: 'An interesting content for this offcanvas'
+    toggle:
+      type: array
+      label: 'Toggle button'
+      description: 'An optional button pattern definition that will allow to show/hide the offcanvas.'
+      preview:
+        label: 'Toggle'
+        icon: 'filter'

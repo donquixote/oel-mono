@@ -1,0 +1,9 @@
+name: OpenEuropa Bootstrap Theme Test Subtheme 1
+type: theme
+base theme: oe_bootstrap_theme
+core_version_requirement: ^10
+
+openeuropa:
+  bootstrap_component_library:
+    components_location: components/templates
+    icon_path: 'assets/icons/bcl-default-icons-test.svg'

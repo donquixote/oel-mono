@@ -1,0 +1,133 @@
+content_banner_white_background_with_image_with_badges_with_meta_with_links_with_action_bar_with_title_tag:
+  render:
+    '#type': pattern
+    '#id': 'content_banner'
+    '#fields':
+      background: 'white'
+      meta:
+        - '26 May 2020'
+        - '1 comment'
+      image:
+        src: 'https://picsum.photos/1200/600/'
+        alt: 'Alternative text for content banner image'
+      title: 'This is the title of this page'
+      title_tag: 'h2'
+      action_bar:
+        - '#markup': '<div class="action-bar d-flex justify-content-end mt-2 align-items-center col-lg-11"><a href="#" class="standalone" type="button">Submit</a></div>'
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat ultricies massa, a dapibus libero porta nec.'
+      badges:
+        - label: 'Primary badge'
+          rounded_pill: true
+          outline: false
+        - label: 'Secondary badge'
+          rounded_pill: true
+      links:
+        - label: 'Link 1'
+          path: 'https://example-1.com'
+        - label: 'Link 2'
+          path: 'https://example-2.com'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\ContentBannerAssert
+      expected:
+        background: 'white'
+        meta:
+          - '26 May 2020'
+          - '1 comment'
+        image:
+          src: 'https://picsum.photos/1200/600/'
+          alt: 'Alternative text for content banner image'
+        title: 'This is the title of this page'
+        title_tag: 'h2'
+        action_bar: '<div class="action-bar d-flex justify-content-end mt-2 align-items-center col-lg-11"><a href="#" class="standalone" type="button">Submit</a></div>'
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat ultricies massa, a dapibus libero porta nec.'
+        badges:
+          - label: 'Primary badge'
+            rounded_pill: true
+            outline: false
+          - label: 'Secondary badge'
+            rounded_pill: true
+        links:
+          - label: 'Link 1'
+            path: 'https://example-1.com'
+          - label: 'Link 2'
+            path: 'https://example-2.com'
+content_banner_white_background_without_image_with_badges_without_meta_without_links:
+  render:
+    '#type': pattern
+    '#id': 'content_banner'
+    '#fields':
+      background: 'white'
+      title: 'This is the title of this page'
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat ultricies massa, a dapibus libero porta nec.'
+      badges:
+        - label: 'Primary badge'
+          rounded_pill: true
+        - label: 'Secondary badge'
+          rounded_pill: true
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\ContentBannerAssert
+      expected:
+        background: 'white'
+        title: 'This is the title of this page'
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat ultricies massa, a dapibus libero porta nec.'
+        badges:
+          - label: 'Primary badge'
+            rounded_pill: true
+          - label: 'Secondary badge'
+            rounded_pill: true
+content_banner_gray_background_with_image_without_badges_without_meta_without_links:
+  render:
+    '#type': pattern
+    '#id': 'content_banner'
+    '#fields':
+      background: 'gray'
+      image:
+        src: 'https://picsum.photos/1200/600/'
+        alt: 'Alternative text for content banner image'
+      image_size: 'xl'
+      title: 'This is the title of this page'
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat ultricies massa, a dapibus libero porta nec.'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\ContentBannerAssert
+      expected:
+        background: 'lighter'
+        image:
+          src: 'https://picsum.photos/1200/600/'
+          alt: 'Alternative text for content banner image'
+        image_size: 'xl'
+        title: 'This is the title of this page'
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat ultricies massa, a dapibus libero porta nec.'
+content_banner_gray_background_without_image_with_badges_with_meta_without_links:
+  render:
+    '#type': pattern
+    '#id': 'content_banner'
+    '#fields':
+      background: 'gray'
+      meta:
+        - '26 May 2020'
+        - '1 comment'
+      title: 'This is the title of this page'
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat ultricies massa, a dapibus libero porta nec.'
+      badges:
+        - label: 'Primary badge'
+          rounded_pill: true
+        - label: 'Secondary badge'
+          rounded_pill: true
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\ContentBannerAssert
+      expected:
+        background: 'lighter'
+        meta:
+          - '26 May 2020'
+          - '1 comment'
+        title: 'This is the title of this page'
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat ultricies massa, a dapibus libero porta nec.'
+        badges:
+          - label: 'Primary badge'
+            rounded_pill: true
+          - label: 'Secondary badge'
+            rounded_pill: true

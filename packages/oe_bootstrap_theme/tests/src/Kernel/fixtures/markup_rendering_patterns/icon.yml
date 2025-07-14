@@ -1,0 +1,65 @@
+icon_default:
+  render:
+    '#type': pattern
+    '#id': 'icon'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\IconPatternAssert
+      expected:
+        name: ''
+        size: 's'
+icon_only_name:
+  render:
+    '#type': pattern
+    '#id': 'icon'
+    '#fields':
+      name: 'envelope'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\IconPatternAssert
+      expected:
+        name: 'envelope'
+        size: 's'
+icon_name_with_size:
+  render:
+    '#type': pattern
+    '#id': 'icon'
+    '#fields':
+      name: 'eye'
+      size: '2xs'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\IconPatternAssert
+      expected:
+        name: 'eye'
+        size: '2xs'
+icon_name_with_size_fluid:
+  render:
+    '#type': pattern
+    '#id': 'icon'
+    '#fields':
+      name: 'eye'
+      size: 'fluid'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\IconPatternAssert
+      expected:
+        name: 'eye'
+        size: 'fluid'
+icon_with_attributes:
+  render:
+    '#type': pattern
+    '#id': 'icon'
+    '#fields':
+      name: 'eye'
+      attributes:
+        id: 'icon-id'
+        data-attribute: 'some-value'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\IconPatternAssert
+      expected:
+        name: 'eye'
+        attributes:
+          id: 'icon-id'
+          data-attribute: 'some-value'

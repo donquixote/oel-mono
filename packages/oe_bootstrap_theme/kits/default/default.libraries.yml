@@ -1,0 +1,5 @@
+style:
+  version: VERSION
+  css:
+    theme:
+      assets/css/OE_BOOTSTRAP_THEME_SUBTHEME_MACHINE_NAME.style.min.css: {}

@@ -1,0 +1,111 @@
+button_dark_with_icon_after:
+  render:
+    '#type': pattern
+    '#id': 'button'
+    '#variant': 'dark'
+    '#fields':
+      settings:
+        icon_position: 'after'
+      type: 'button'
+      label: 'Button label'
+      icon: 'arrow-right'
+  assertions:
+    count:
+      'button[data-drupal-selector="button"]': 1
+      'button.btn': 1
+      'svg.icon--fluid.ms-2-5': 1
+      'button.btn-dark': 1
+      'button svg': 1
+    contains:
+      'button.btn-dark': 'Button label'
+      'svg': '#arrow-right'
+button_without_icon:
+  render:
+    '#type': pattern
+    '#id': 'button'
+    '#fields':
+      settings:
+      type: 'button'
+      label: 'Button label'
+  assertions:
+    count:
+      'button[data-drupal-selector="button"]': 1
+      'button.btn.btn-primary': 1
+    equals:
+      'button': 'Button label'
+button_secondary:
+  render:
+    '#type': pattern
+    '#id': 'button'
+    '#variant': 'secondary'
+    '#fields':
+      settings:
+      type: 'button'
+      label: 'Button label'
+  assertions:
+    count:
+      'button[data-drupal-selector="button"]': 1
+      'button.btn.btn-secondary': 1
+    equals:
+      'button.btn-secondary': 'Button label'
+button_primary_small_with_outline_and_disabled:
+  render:
+    '#type': pattern
+    '#id': 'button'
+    '#fields':
+      settings:
+        outline: true
+        disabled: true
+        size: 'sm'
+      type: 'button'
+      label: 'Button label'
+  assertions:
+    count:
+      'button[data-drupal-selector="button"]': 1
+      'button[disabled]': 1
+      'button.btn.btn-outline-primary': 1
+      'button.btn-sm': 1
+    equals:
+      'button.btn-outline-primary': 'Button label'
+button_warning_large:
+  render:
+    '#type': pattern
+    '#id': 'button'
+    '#variant': 'warning'
+    '#fields':
+      settings:
+        outline: false
+        disabled: false
+        size: 'lg'
+      type: 'button'
+      label: 'Button label'
+  assertions:
+    count:
+      'button[data-drupal-selector="button"]': 1
+      'button.btn.btn-warning': 1
+      'button[disabled]': 0
+      'button.btn-lg': 1
+    equals:
+      'button.btn-warning': 'Button label'
+button_dark_with_icon_before_and_type_reset:
+  render:
+    '#type': pattern
+    '#id': 'button'
+    '#variant': 'dark'
+    '#fields':
+      settings:
+        icon_position: 'before'
+      type: 'reset'
+      label: 'Button label'
+      icon: 'arrow-right'
+  assertions:
+    count:
+      'button[data-drupal-selector="button"]': 1
+      'button.btn': 1
+      'svg.icon--fluid.me-2-5': 1
+      'button.btn-dark': 1
+      'button svg': 1
+      'button[type=reset]': 1
+    contains:
+      'button.btn-dark': 'Button label'
+      'svg': '#arrow-right'

@@ -1,0 +1,41 @@
+link:
+  label: 'Link'
+  description: 'A simple link.'
+  settings:
+    disabled:
+      type: boolean
+      label: 'Disabled'
+      description: 'When enabled, sets the link as disabled. Defaults to false.'
+    standalone:
+      type: boolean
+      label: 'Standalone'
+      description: 'When enabled, adds extra class to underline the link item when hover. Defaults to false.'
+      preview: 'true'
+    icon_position:
+      type: select
+      label: 'Icon position'
+      description: 'The position of the icon in relation to the text of the link:'
+      options:
+        before: 'before'
+        after: 'after (default)'
+    remove_icon_spacers:
+      type: boolean
+      label: 'Remove icon spacers'
+      description: 'When enabled, prevents margins to be added to the icon. Defaults to false.'
+  fields:
+    label:
+      type: text
+      label: 'Label'
+      description: 'The button label'
+      preview: 'Submit'
+    path:
+      type: text
+      label: 'URL'
+      description: 'The button URL (optional).'
+      preview: 'http://example.com'
+      escape: false
+    icon:
+      type: mixed
+      label: 'Icon'
+      description: 'An icon name or an icon array definition (optional).'
+      preview: 'key'

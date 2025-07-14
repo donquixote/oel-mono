@@ -1,0 +1,81 @@
+navbar:
+  label: 'Navbar'
+  description: 'Powerful, responsive navigation bar. Includes support for branding, navigation, and more, including support for our collapse plugin. For more information: https://v5.getbootstrap.com/docs/5.0/components/navbar/'
+  fields:
+    expanded_breakpoint:
+      type: string
+      label: 'Expanded breakpoint'
+      description: 'The breakpoint at which the menu will be shown as expanded. For earlier breakpoints, it will be shown after clicking a toggle button. Must be a valid breakpoint class (sm, md, lg). Defaults to lg. If not present, then will not collapse.'
+      preview: 'lg'
+    color_scheme:
+      type: string
+      label: 'Color scheme'
+      description: 'The color scheme to use. Can be either light or dark.'
+    background:
+      type: boolean
+      label: 'Background'
+      description: 'Adds a background color that depends on the color scheme. Enabled by default.'
+      preview: true
+    branding:
+      type: render
+      label: 'Branding region'
+      description: 'Navbar branding region. E.g. for text and/or logo.'
+      preview:
+        - type: html_tag
+          tag: a
+          value: 'Navbar'
+          attributes:
+            href: '#navbar'
+            rel: home
+            class: 'navbar-brand'
+    navigation:
+      type: render
+      label: 'Navigation region'
+      description: 'Navbar navigation region. Usually contains navigation items.'
+      preview:
+        - type: pattern
+          id: link
+          label: 'I am a link'
+          path: '#first'
+          attributes:
+            class: 'nav-link'
+        - type: pattern
+          id: link
+          label: 'I am a link 2'
+          path: '#second'
+          attributes:
+            class: 'nav-link'
+        - type: pattern
+          id: link
+          label: 'I am a link 3'
+          path: '#third'
+          attributes:
+            class: 'nav-link'
+        - type: pattern
+          id: dropdown
+          variant: default
+          fields:
+            button_label: 'Dropdown Toggle'
+            items:
+              - path: '#navbar'
+                label: 'I am a link'
+              - path: '#navbar'
+                label: 'I am an active button'
+                button: true
+                active: true
+              - divider: true
+              - path: '#navbar'
+                button: true
+                disabled: true
+                label: 'I am a disabled button'
+    right:
+      type: render
+      label: 'Right region'
+      description: 'Navbar right region. Sticks at the right of the navbar. Usually contains a search form.'
+      preview:
+        - type: html_tag
+          tag: form
+          attributes:
+            class: 'd-flex'
+          children:
+            '<label for="inlineFormInputGroupSearch" class="form-label visually-hidden">Search</label><input class="form-control" type="text" id="inlineFormInputGroupSearch" required="true" placeholder="Search"/><div class="ms-2"><button class="btn btn-primary btn-md" type="Search">Search</button></div>'

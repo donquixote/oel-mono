@@ -1,0 +1,104 @@
+badge_with_all_values:
+  render:
+    '#type': pattern
+    '#id': badge
+    '#fields':
+      settings:
+        background: 'danger'
+        rounded_pill: true
+        dismissible: true
+        outline: true
+      label: 'A simple badge!'
+      url: 'https://example.com'
+      title: 'The badge title'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\BadgePatternAssert
+      expected:
+        settings:
+          background: 'danger'
+          rounded_pill: true
+          dismissible: true
+          outline: true
+        label: 'A simple badge!'
+        url: 'https://example.com'
+        title: 'The badge title'
+badge_no_settings_sent:
+  render:
+    '#type': pattern
+    '#id': badge
+    '#fields':
+      label: 'A simple badge!'
+      url: 'https://example.com'
+      title: 'The badge title'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\BadgePatternAssert
+      expected:
+        settings:
+          background: 'primary'
+          rounded_pill: false
+          dismissible: false
+          outline: false
+        label: 'A simple badge!'
+        url: 'https://example.com'
+        title: 'The badge title'
+badge_dimissible_with_rounded_pill:
+  render:
+    '#type': pattern
+    '#id': badge
+    '#fields':
+      settings:
+        dismissible: true
+        rounded_pill: true
+        background: 'secondary'
+      label: 'A simple badge!'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\BadgePatternAssert
+      expected:
+        settings:
+          dismissible: true
+          rounded_pill: true
+          background: 'secondary'
+        label: 'A simple badge!'
+badge_non_dimissible_without_rounded_pill:
+  render:
+    '#type': pattern
+    '#id': badge
+    '#fields':
+      settings:
+        dismissible: false
+        rounded_pill: false
+        background: 'danger'
+      label: 'A simple badge!'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\BadgePatternAssert
+      expected:
+        settings:
+          dismissible: false
+          rounded_pill: false
+          background: 'danger'
+        label: 'A simple badge!'
+badge_with_url:
+  render:
+    '#type': pattern
+    '#id': badge
+    '#fields':
+      settings:
+        dismissible: true
+        rounded_pill: true
+        background: 'secondary'
+      label: 'A simple badge!'
+      url: 'https://example.com'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\BadgePatternAssert
+      expected:
+        settings:
+          dismissible: true
+          rounded_pill: true
+          background: 'secondary'
+        label: 'A simple badge!'
+        url: 'https://example.com'

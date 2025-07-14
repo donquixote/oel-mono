@@ -1,0 +1,48 @@
+badge:
+  label: 'Badge'
+  description: 'A small count and labeling component. Badges scale to match the size of the immediate parent element by using relative font sizing and em units. For more information: https://v5.getbootstrap.com/docs/5.0/components/badge/'
+  settings:
+    background:
+      type: select
+      label: 'Badge background'
+      description: 'Set the background color of the badge. Defaults to "primary".'
+      options:
+        primary: 'primary (default)'
+        secondary: 'secondary'
+        success: 'success'
+        danger: 'danger'
+        warning: 'warning'
+        info: 'info'
+        light: 'light'
+        dark: 'dark'
+        link: 'link'
+    rounded_pill:
+      type: boolean
+      label: 'Pill badge.'
+      description: 'Make the badge a rounded pill. Defaults to false.'
+    dismissible:
+      type: boolean
+      label: 'Dismissible badge. Optional'
+      description: 'Add a close icon at the end of the badge. Defaults to false.'
+      preview: true
+    outline:
+      type: boolean
+      label: 'Outline.'
+      description: 'Use a border instead of a background. Defaults to false.'
+  fields:
+    label:
+      type: text
+      label: 'Label'
+      description: 'The badge label.'
+      preview: 'New'
+    url:
+      type: text
+      label: 'Badge URL'
+      description: 'Converts the badge in a link. Optional.'
+      preview: 'https://europa.eu'
+      escape: false
+    title:
+      type: text
+      label: 'Link title'
+      description: 'Title attribute if the badge is a link. Optional.'
+      preview: 'European website.'

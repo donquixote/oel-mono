@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Override for core 'pager' template, using the 'navigation' pattern.
+ */
+#}
+{% block pager %}
+{% if items %}
+  {{ pattern('pagination', {
+    'alignment': 'center',
+    'first': items.first ? {
+      'label': items.first.text|default('First'|t),
+      'path': items.first.href,
+    },
+    'prev': items.previous ? {
+      'label': items.previous.text|default('Previous'|t),
+      'path': items.previous.href,
+    },
+    'items': items.pages|map((item, key) => {
+      'label': key,
+      'path': item.href,
+      'active': key == current,
+    }),
+    'next': items.next ? {
+      'label': items.next.text|default('Next'|t),
+      'path': items.next.href,
+    },
+    'last': items.last ? {
+      'label': items.last.text|default('Last'|t),
+      'path': items.last.href,
+    },
+  }) }}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,67 @@
+card_v2:
+  label: 'Card V2'
+  category: 'Version 2.x'
+  description: 'Bootstrap 5 card pattern in its second iteration. Every zone (header, media, body, footer) is exposed as a render field so you can drop in plain markup, views, or other UI Patterns. See https://getbootstrap.com/docs/5.3/components/card'
+  variants:
+    default:
+      label: 'Default'
+      description: '16:9 media on top, content below. Ideal for news, search results, dashboards.'
+    horizontal:
+      label: 'Horizontal'
+      description: '1:1 media left, content right – compact lists, sidebars.'
+  fields:
+    title:
+      type: render
+      label: 'Title'
+      description: 'Card title. Supports markup, e.g. for links.'
+    media:
+      type: render
+      label: 'Media'
+      description: 'Optional. Accepts an image, video, icon, map thumbnail, or another pattern such as date_block.'
+    content:
+      type: render
+      label: 'Body content'
+      description: 'Rich text, badges, buttons… whatever you need.'
+    header:
+      type: render
+      label: 'Header'
+      description: 'Optional – meta information, category pill, etc.'
+    footer:
+      type: render
+      label: 'Footer'
+      description: 'Optional – secondary actions, updated timestamps, share links.'
+  settings:
+    tag:
+      type: select
+      label: 'HTML wrapper tag'
+      description: 'Semantic element for the outer wrapper. Defaults to <article>.'
+      default_value: 'article'
+      options:
+        article: '<article>'
+        section: '<section>'
+        div: '<div>'
+    attributes:
+      type: attributes
+      label: 'Card attributes'
+      description: 'Utility classes or data-* attributes for the outer wrapper.'
+      allow_token: true
+    media_attributes:
+      type: attributes
+      label: 'Media attributes'
+      description: 'Alt text, loading="lazy", ratio utilities like ratio-16x9, or placeholder-glow.'
+      allow_token: true
+    content_attributes:
+      type: attributes
+      label: 'Body attributes'
+      description: 'Padding tweaks (p-4), text alignment (text-center), etc.'
+      allow_token: true
+    header_attributes:
+      type: attributes
+      label: 'Header attributes'
+      description: 'Extra attributes for the card header, e.g. .bg-light for contrast.'
+      allow_token: true
+    footer_attributes:
+      type: attributes
+      label: 'Footer attributes'
+      description: 'Extra attributes for the card footer, e.g. .border-0 pt-0 for a seamless footer.'
+      allow_token: true

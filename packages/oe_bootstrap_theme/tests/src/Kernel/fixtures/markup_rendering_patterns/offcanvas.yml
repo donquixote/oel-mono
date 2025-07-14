@@ -1,0 +1,137 @@
+offcanvas_top_with_backdrop_and_toggle:
+  render:
+    '#type': pattern
+    '#id': offcanvas
+    '#fields':
+      settings:
+        placement: top
+        body_scroll: false
+        backdrop: true
+      title: 'Offcanvas title'
+      body: 'This is the offcanvas body content.'
+      toggle:
+        label: 'Toggle offcanvas'
+  assertions:
+    count:
+      '.offcanvas-body:not(.bcl-offcanvas)': 1
+      'button[data-bs-target="#bcl-offcanvas"]': 2
+      '.btn-primary[data-bs-toggle="offcanvas"]': 1
+      '.btn-close[data-bs-target="#bcl-offcanvas"]': 1
+      'div[data-drupal-selector="offcanvas"]': 1
+      'div#bcl-offcanvas': 1
+      'div#bcl-offcanvas .btn-close[data-bs-target="#bcl-offcanvas"]': 1
+      'div.offcanvas-lg.offcanvas-top': 1
+    equals:
+      '.offcanvas-title': 'Offcanvas title'
+      'div.offcanvas-body': 'This is the offcanvas body content.'
+      'button[data-bs-toggle="offcanvas"]': 'Toggle offcanvas'
+offcanvas_start_with_body_scroll:
+  render:
+    '#type': pattern
+    '#id': offcanvas
+    '#fields':
+      settings:
+        placement: start
+        body_scroll: true
+        backdrop: false
+      title: 'Offcanvas title'
+      body: 'This is the offcanvas body content.'
+  assertions:
+    count:
+      'div[data-drupal-selector="offcanvas"]': 1
+      'div#bcl-offcanvas': 1
+      'div.offcanvas-lg.offcanvas-start': 1
+      'button[data-bs-target="#bcl-offcanvas"]': 1
+      '.btn-primary[data-bs-toggle="offcanvas"]': 0
+      '.btn-close[data-bs-target="#bcl-offcanvas"]': 1
+      'div#bcl-offcanvas .btn-close[data-bs-target="#bcl-offcanvas"]': 1
+    equals:
+      '.offcanvas-title': 'Offcanvas title'
+      'div.offcanvas-body': 'This is the offcanvas body content.'
+offcanvas_with_toggle_with_icon:
+  render:
+    '#type': pattern
+    '#id': offcanvas
+    '#fields':
+      settings:
+        placement: top
+        body_scroll: false
+        backdrop: true
+      title: 'Offcanvas title'
+      body: 'This is the offcanvas body content.'
+      toggle:
+        label: 'Toggle offcanvas'
+        icon: 'filter'
+  assertions:
+    count:
+      'button[data-bs-target="#bcl-offcanvas"]': 2
+      '.btn-primary[data-bs-toggle="offcanvas"]': 1
+      '.btn-close[data-bs-target="#bcl-offcanvas"]': 1
+      'div[data-drupal-selector="offcanvas"]': 1
+      'div#bcl-offcanvas': 1
+      'div.offcanvas-lg.offcanvas-top': 1
+      'div#bcl-offcanvas .btn-close[data-bs-target="#bcl-offcanvas"]': 1
+      'svg.bi': 1
+    equals:
+      '.offcanvas-title': 'Offcanvas title'
+      'div.offcanvas-body': 'This is the offcanvas body content.'
+      'button[data-bs-toggle="offcanvas"]': 'Toggle offcanvas<svg class="ms-2-5 bi icon--fluid"><use xlink:href="/themes/custom/oe_bootstrap_theme/assets/icons/bcl-default-icons.svg#filter"></use></svg>'
+offcanvas_with_id_from_attributes:
+  render:
+    '#type': pattern
+    '#id': offcanvas
+    '#fields':
+      settings:
+        placement: bottom
+        body_scroll: false
+        backdrop: true
+      title: 'Offcanvas title'
+      body: 'This is the offcanvas body content.'
+      toggle:
+        label: 'Toggle offcanvas'
+        icon: 'filter'
+      attributes:
+        id: 'custom-id'
+  assertions:
+    count:
+      'div#custom-id': 1
+      'div.offcanvas-lg.offcanvas-bottom': 1
+      'svg.bi': 1
+      'button[data-bs-target="#custom-id"]': 2
+      '.btn-primary[data-bs-toggle="offcanvas"]': 1
+      '.btn-close[data-bs-target="#custom-id"]': 1
+      'div#custom-id .btn-close[data-bs-target="#custom-id"]': 1
+    equals:
+      '.offcanvas-title': 'Offcanvas title'
+      'div.offcanvas-body': 'This is the offcanvas body content.'
+      'button[data-bs-toggle="offcanvas"]': 'Toggle offcanvas<svg class="ms-2-5 bi icon--fluid"><use xlink:href="/themes/custom/oe_bootstrap_theme/assets/icons/bcl-default-icons.svg#filter"></use></svg>'
+offcanvas_search_variant:
+  render:
+    '#type': pattern
+    '#id': 'offcanvas'
+    '#variant': 'search'
+    '#fields':
+      settings:
+        placement: top
+        body_scroll: false
+        backdrop: true
+      title: 'Offcanvas title'
+      body: 'This is the offcanvas body content.'
+      toggle:
+        label: 'Toggle offcanvas'
+        icon: 'filter'
+  assertions:
+    count:
+      'h2': 1
+      'button[data-bs-target="#bcl-offcanvas"]': 2
+      '.btn-primary[data-bs-toggle="offcanvas"]': 1
+      '.btn-close[data-bs-target="#bcl-offcanvas"]': 1
+      'div[data-drupal-selector="offcanvas"]': 1
+      'div#bcl-offcanvas': 1
+      'div#bcl-offcanvas .btn-close[data-bs-target="#bcl-offcanvas"]': 1
+      'div.offcanvas-lg.offcanvas-top': 1
+      'svg.bi': 1
+    equals:
+      '.offcanvas-title': 'Offcanvas title'
+      'div.offcanvas-body': 'This is the offcanvas body content.'
+      'button[data-bs-toggle="offcanvas"]': 'Toggle offcanvas<svg class="ms-2-5 bi icon--fluid"><use xlink:href="/themes/custom/oe_bootstrap_theme/assets/icons/bcl-default-icons.svg#filter"></use></svg>'

@@ -1,0 +1,193 @@
+navbar_pattern_large_light_scheme_default_breakpoint:
+  render:
+    '#type': pattern
+    '#id': navbar
+    '#fields':
+      expanded_breakpoint: 'lg'
+      color_scheme: light
+      branding:
+        - '#type': pattern
+          '#id': link
+          '#fields':
+            label: 'OpenEuropa Site'
+            path: 'https://europa.eu/'
+            attributes:
+              rel: 'home'
+              class: 'navbar-brand'
+      navigation:
+        - '#type': pattern
+          '#id': link
+          '#fields':
+            label: "I'm a link"
+            path: '#first'
+            attributes:
+              class: 'nav-link'
+        - '#type': pattern
+          '#id': link
+          '#fields':
+            label: "I'm a link 2"
+            path: '#second'
+            attributes:
+              class: 'nav-link'
+        - '#type': pattern
+          '#id': link
+          '#fields':
+            label: "I'm a link 3"
+            path: '#third'
+            attributes:
+              class: 'nav-link'
+        - '#type': pattern
+          '#id': dropdown
+          '#variant': default
+          '#fields':
+            button_label: 'Dropdown Toggle'
+            items:
+              - label: "I'm a link in a dropdown"
+                path: '#navbar-dropdown-link'
+              - label: "I'm a button"
+                button: true
+      right:
+        - '#type': html_tag
+          '#tag': form
+          '#children':
+            '<label for="inlineFormInputGroupSearch" class="form-label visually-hidden">Search</label><input class="form-control" type="text" id="inlineFormInputGroupSearch" required="true" placeholder="Search"/><div class="ms-2"><button class="btn btn-primary btn-md" type="Search">Search</button></div>'
+          '#attributes':
+            class: 'd-flex'
+  assertions:
+    count:
+      'nav': 1
+      'nav.navbar': 1
+      'nav.bg-light': 1
+      'nav.navbar-light': 1
+      'nav.bg-dark': 0
+      'nav.navbar-dark': 0
+      'nav.navbar-expand-sm': 0
+      'nav.navbar-expand-md': 0
+      'nav.navbar-expand-lg': 1
+      'button.navbar-toggler': 1
+      'button[data-bs-target="#bcl-navbar"]': 1
+      'div#bcl-navbar.navbar-collapse': 1
+      'a': 5
+      'div#bcl-navbar.navbar-collapse > a': 3
+      'div.navbar-collapse > form.d-flex': 1
+    equals:
+      'div#bcl-navbar a:nth-child(1)': "I'm a link"
+      'div#bcl-navbar a:nth-child(2)': "I'm a link 2"
+      'div#bcl-navbar a:nth-child(3)': "I'm a link 3"
+      'div#bcl-navbar ul.dropdown-menu li .dropdown-item': "I'm a link in a dropdown"
+      'div#bcl-navbar button.dropdown-item': "I'm a button"
+      'label': 'Search'
+      'nav > div.container > a.navbar-brand[href="https://europa.eu/"]': 'OpenEuropa Site'
+      'div.navbar-collapse label': 'Search'
+navbar_pattern_medium_dark_scheme_md_breakpoint:
+  render:
+    '#type': pattern
+    '#id': navbar
+    '#fields':
+      expanded_breakpoint: md
+      color_scheme: dark
+      branding:
+        - '#type': pattern
+          '#id': link
+          '#fields':
+            expanded_breakpoint: 'lg'
+            label: 'OpenEuropa Site'
+            path: 'https://europa.eu/'
+            attributes:
+              rel: 'home'
+              class: 'navbar-brand'
+      navigation:
+        - '#type': pattern
+          '#id': link
+          '#fields':
+            label: "I'm a link"
+            path: '#first'
+            attributes:
+              class: 'nav-link'
+        - '#type': pattern
+          '#id': link
+          '#fields':
+            label: "I'm a link 2"
+            path: '#second'
+            attributes:
+              class: 'nav-link'
+        - '#type': pattern
+          '#id': link
+          '#fields':
+            label: "I'm a link 3"
+            path: '#third'
+            attributes:
+              class: 'nav-link'
+        - '#type': pattern
+          '#id': dropdown
+          '#variant': default
+          '#fields':
+            button_label: 'Dropdown Toggle'
+            items:
+              - label: "I'm a link in a dropdown"
+                path: '#navbar-dropdown-link'
+              - label: "I'm a button"
+                button: true
+      right:
+        - '#type': html_tag
+          '#tag': form
+          '#children':
+            '<label for="inlineFormInputGroupSearch" class="form-label visually-hidden">Search</label><input class="form-control" type="text" id="inlineFormInputGroupSearch" required="true" placeholder="Search"/><div class="ms-2"><button class="btn btn-primary btn-md" type="Search">Search</button></div>'
+          '#attributes':
+            class: 'd-flex'
+  assertions:
+    count:
+      'nav': 1
+      'nav.navbar': 1
+      'nav.bg-light': 0
+      'nav.navbar-light': 0
+      'nav.bg-dark': 1
+      'nav.navbar-dark': 1
+      'nav.navbar-expand-sm': 0
+      'nav.navbar-expand-md': 1
+      'nav.navbar-expand-lg': 0
+      'button.navbar-toggler': 1
+      'button[data-bs-target="#bcl-navbar"]': 1
+      'div#bcl-navbar.navbar-collapse': 1
+      'a': 5
+      'div#bcl-navbar.navbar-collapse > a': 3
+      'div.navbar-collapse > form.d-flex': 1
+    equals:
+      'div#bcl-navbar a:nth-child(1)': "I'm a link"
+      'div#bcl-navbar a:nth-child(2)': "I'm a link 2"
+      'div#bcl-navbar a:nth-child(3)': "I'm a link 3"
+      'div#bcl-navbar ul.dropdown-menu li .dropdown-item': "I'm a link in a dropdown"
+      'div#bcl-navbar button.dropdown-item': "I'm a button"
+      'a.navbar-brand[href="https://europa.eu/"]': 'OpenEuropa Site'
+      'div.navbar-collapse label': 'Search'
+navbar_pattern_medium_default_scheme_only_navigation:
+  render:
+    '#type': pattern
+    '#id': navbar
+    '#fields':
+      expanded_breakpoint: 'lg'
+      navigation:
+        - '#type': pattern
+          '#id': link
+          '#fields':
+            label: "I'm a link"
+            path: '#first'
+            attributes:
+              class: 'nav-link'
+  assertions:
+    count:
+      'nav': 1
+      'nav.navbar': 1
+      'nav.bg-light': 1
+      'nav.navbar-light': 1
+      'nav.bg-dark': 0
+      'nav.navbar-dark': 0
+      'nav.navbar-expand-sm': 0
+      'nav.navbar-expand-md': 0
+      'nav.navbar-expand-lg': 1
+      'button.navbar-toggler': 1
+      'button[data-bs-target="#bcl-navbar"]': 1
+      'div#bcl-navbar.navbar-collapse': 1
+      'div#bcl-navbar.navbar-collapse > a': 1
+    equals:
+      'div#bcl-navbar a': "I'm a link"

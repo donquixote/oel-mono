@@ -1,0 +1,31 @@
+breadcrumb:
+  render:
+    '#type': pattern
+    '#id': breadcrumb
+    '#fields':
+      attributes:
+        class:
+          - 'mt-3'
+      items:
+        - path: '/index'
+          label: 'Home'
+        - path: '/example'
+          label: 'About the European Commission'
+        - path: 'https://example.com'
+          label: 'Link title'
+  assertions:
+    count:
+      'nav.mt-3[aria-label="breadcrumb"]': 1
+      'ol.breadcrumb': 1
+      'li.breadcrumb-item': 3
+      'li.breadcrumb-item:nth-child(1) a[href="/index"]': 1
+      'li.breadcrumb-item:nth-child(2) a[href="/example"]': 1
+      'li.breadcrumb-item:nth-child(3) a[href="https://example.com"]': 1
+      'li.breadcrumb-item:nth-child(2) a svg.d-md-none.bi.icon--s': 1
+      'svg.d-md-none.ms-0.me-2.me-2-5.bi.icon--s': 1
+    equals:
+      'li.breadcrumb-item:nth-child(1) a': 'Home'
+      'li.breadcrumb-item:nth-child(2) a': '<svg class="d-md-none ms-0 me-2 me-2-5 bi icon--s"><use xlink:href="/themes/custom/oe_bootstrap_theme/assets/icons/bcl-default-icons.svg#arrow-left"></use></svg>About the European Commission'
+      'li.breadcrumb-item:nth-child(3) a': 'Link title'
+    contains:
+      'svg': '/icons/bcl-default-icons.svg#arrow-left'

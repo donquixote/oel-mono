@@ -1,0 +1,164 @@
+card_horizontal_with_image:
+  render:
+    '#type': pattern
+    '#id': 'card'
+    '#fields':
+      orientation: 'horizontal'
+      title: 'Title card'
+      title_tag: 'h2'
+      subtitle: 'Subtitle card'
+      text: 'Text card with longer text which is supported'
+      image:
+        src: 'https://picsum.photos/1000/500/'
+        alt: 'Alternative text for card image'
+      meta:
+        - 'DIGIT'
+        - 'Developer'
+      content:
+        '#type': 'pattern'
+        '#id': 'button'
+        '#fields':
+          settings:
+            style: 'primary'
+          label: 'Custom action'
+      header: 'Header of card'
+      footer: 'Footer of card'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\CardPatternAssert
+      expected:
+        horizontal: true
+        title: 'Title card'
+        title_tag: 'h2'
+        subtitle: 'Subtitle card'
+        description: 'Text card with longer text which is supported'
+        image:
+          src: 'https://picsum.photos/1000/500/'
+          alt: 'Alternative text for card image'
+        content:
+          - 'DIGIT'
+          - 'Developer'
+          - '<button class="btn btn-primary btn-md" type="button">Custom action</button>'
+        header: 'Header of card'
+        footer: 'Footer of card'
+card_vertical:
+  render:
+    '#type': pattern
+    '#id': 'card'
+    '#fields':
+      orientation: 'vertical'
+      title: 'Title card'
+      subtitle: 'Subtitle card'
+      text: 'Text card with longer text which is supported'
+      image:
+        src: 'https://picsum.photos/1000/500/'
+        alt: 'Alternative text for card image'
+      content:
+        '#type': 'pattern'
+        '#id': 'button'
+        '#fields':
+          settings:
+            style: 'primary'
+          label: 'Custom action'
+      header: 'Header of card'
+      footer: 'Footer of card'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\CardPatternAssert
+      expected:
+        horizontal: false
+        title: 'Title card'
+        title_tag: 'h1'
+        subtitle: 'Subtitle card'
+        description: 'Text card with longer text which is supported'
+        image:
+          src: 'https://picsum.photos/1000/500/'
+          alt: 'Alternative text for card image'
+        content:
+          - '<button class="btn btn-primary btn-md" type="button">Custom action</button>'
+        header: 'Header of card'
+        footer: 'Footer of card'
+card_variant_search:
+  render:
+    '#type': pattern
+    '#id': 'card'
+    '#variant': 'search'
+    '#fields':
+      title: 'Title card'
+      title_tag: 'h3'
+      text: 'Text card with longer text which is supported'
+      image:
+        src: 'https://picsum.photos/1000/500/'
+      badges:
+        - label: 'Category 1'
+        - label: 'Category 2'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\CardPatternAssert
+      expected:
+        title: 'Title card'
+        title_tag: 'h3'
+        description: 'Text card with longer text which is supported'
+        image:
+          src: 'https://picsum.photos/1000/500/'
+          alt: ''
+        badges:
+          - label: 'Category 1'
+          - label: 'Category 2'
+card_search_with_date:
+  render:
+    '#type': pattern
+    '#id': 'card'
+    '#variant': 'search'
+    '#fields':
+      title: 'Title card'
+      text: 'Text card with longer text which is supported'
+      date:
+        year: "2021"
+        month: "Jan"
+        day: "23"
+        date_time: "2021-01-23"
+      badges:
+        - label: 'Category 1'
+        - label: 'Category 2'
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\CardPatternAssert
+      expected:
+        title: 'Title card'
+        title_tag: 'h1'
+        description: 'Text card with longer text which is supported'
+        date:
+          year: "2021"
+          month: "Jan"
+          day: "23"
+          date_time: "2021-01-23"
+        badges:
+          - label: 'Category 1'
+          - label: 'Category 2'
+card_with_date_range:
+  render:
+    '#type': pattern
+    '#id': 'card'
+    '#fields':
+      title: 'Title card'
+      date:
+        year: "2021"
+        month: "Jan"
+        day: "23"
+        end_year: "2022"
+        end_month: "Feb"
+        end_day: "11"
+  assertions:
+    pattern:
+      class: Drupal\Tests\oe_bootstrap_theme\PatternAssertion\CardPatternAssert
+      expected:
+        title: 'Title card'
+        title_tag: 'h1'
+        date:
+          year: "2021"
+          month: "Jan"
+          day: "23"
+          end_year: "2022"
+          end_month: "Feb"
+          end_day: "11"

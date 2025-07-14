@@ -1,0 +1,40 @@
+list_group:
+  label: 'List Group'
+  description: 'List groups are a flexible and powerful component for displaying a series of content. Modify and extend them to support just about any content within. For more information visit https://v5.getbootstrap.com/docs/5.0/components/list-group/'
+  settings:
+    type:
+      type: select
+      label: 'Type'
+      description: 'The list of possible list types is:'
+      options:
+        unordered: 'unordered (default)'
+        ordered: 'ordered'
+        actionable: 'actionable'
+    flush:
+      type: boolean
+      label: 'Flush'
+      description: 'When enabled, adds flush to remove some borders and rounded corners to render list group items edge-to-edge in a parent container (e.g., cards). Defaults to false.'
+  fields:
+    items:
+      type: array
+      label: 'List group items'
+      description: 'Array of objects: List item object or Button and Link component object if type is actionable.'
+      preview:
+        - variant: 'danger'
+          html: 'Label 1'
+        - variant: 'secondary'
+          html: 'Label 2'
+        - variant: 'primary'
+          html: 'Label 3'
+        - label: 'Example form input'
+          required: FALSE
+          readonly: FALSE
+          id: 'example-form-input-1'
+          size: 'sm'
+          input: TRUE
+          input_type: 'checkbox'
+        - variant: 'warning'
+          html: 'Label 5'
+          badge:
+            label: '10'
+            rounded_pill: TRUE
