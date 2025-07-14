@@ -1,0 +1,107 @@
+{% extends "@oe_whitelabel/overrides/navigation/oe-corporate-blocks-neutral-footer.html.twig" %}
+
+{% block accessibility_link %}
+  {% set _accessibility_link = pattern('link', {
+    label: 'Accessibility statement'|t,
+    path: accessibility_link,
+    standalone: true,
+  }) %}
+  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+  {% set _top_sections =  {
+    'extra_classes': 'pt-4 pt-lg-5',
+    'cols': [
+      {
+        'classes': 'col-12 col-lg-4',
+        'items': [
+        {
+          'type': 'content',
+          'content': footer_top_left_content,
+        },
+      ],
+      },
+      {
+        'classes': 'col-12 col-lg-4 pb-4 pb-lg-0',
+        'items': _section_2,
+      },
+      {
+        'classes': 'col-12 col-lg-4',
+        'items': _section_3,
+      }
+    ],
+  } %}
+
+  {% set eu_logo %}
+    <picture>
+      <source media="(max-width: 992px)"
+              srcset="{{ bcl_logo_path ~ 'eu/mobile/logo-eu--' ~ current_language_id|to_internal_language_id ~ '.svg' }}">
+      <img src="{{ bcl_logo_path ~ 'eu/logo-eu--' ~ current_language_id|to_internal_language_id ~ '.svg' }}"
+           alt="{{ site_logo_alt }}" title="{{ site_logo_title }}"/>
+    </picture>
+  {% endset %}
+
+  {% set _bottom_sections =  {
+    'extra_classes': 'pb-4 pb-lg-5 mt-4 mt-lg-5 bcl-footer__bordered-row row',
+    'cols': [
+      {
+        'classes': 'col-12 col-lg-4 pb-4',
+        'items': [
+        {
+          'type': 'content',
+          'content': eu_logo,
+        },
+      ],
+      },
+      {
+        'classes': 'col-12 col-lg-4',
+        'items': [
+        {
+          'type': 'content',
+          'content':  _self.bcl_title(corporate_footer.contact_title, 'fw-bold border-bottom pb-2 mb-2'),
+        },
+        {
+          'type': 'links',
+          'links': bcl_footer_links(corporate_footer.contact),
+        },
+        {
+          'type': 'content',
+          'content':  _self.bcl_title(corporate_footer.social_media_title, 'fw-bold border-bottom pb-2 pt-3 mb-2'),
+        },
+        {
+          'type': 'links',
+          'links': bcl_footer_links(corporate_footer.social_media),
+        },
+        ],
+      },
+      {
+        'classes': 'col-12 col-lg-4',
+        'items': [
+        {
+          'type': 'content',
+          'content':  _self.bcl_title(corporate_footer.legal_links_title, 'fw-bold border-bottom pb-2 pt-3 pt-lg-0 mb-2'),
+        },
+        {
+          'type': 'links',
+          'links': bcl_footer_links(corporate_footer.legal_links),
+        },
+        {
+          'type': 'content',
+          'content':  _self.bcl_title(corporate_footer.institution_links_title, 'fw-bold border-bottom pb-2 pt-3 mb-2'),
+        },
+        {
+          'type': 'links',
+          'links': bcl_footer_links(corporate_footer.institution_links),
+        },
+      ],
+      }
+    ],
+  } %}
+
+  {% include '@oe-bcl/footer' with {
+    'variant': 'eu',
+    'rows': [_top_sections, _bottom_sections],
+    'attributes': attributes,
+  } only %}
+{% endblock %}

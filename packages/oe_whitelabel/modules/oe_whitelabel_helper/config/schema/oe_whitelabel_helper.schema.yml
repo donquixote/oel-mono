@@ -1,0 +1,43 @@
+field.formatter.settings.oe_whitelabel_helper_address_inline:
+  type: mapping
+  label: 'Address inline formatter settings'
+  mapping:
+    delimiter:
+      type: string
+      label: 'Delimiter for address items.'
+    properties:
+      type: sequence
+      sequence:
+        type: boolean
+        label: 'Properties'
+condition.plugin.oe_whitelabel_helper_current_component_library:
+  type: condition.plugin
+  mapping:
+    component_library:
+      type: string
+field_group.field_group_formatter_plugin.oe_whitelabel_helper_pattern_base:
+  type: field_group.field_group_formatter_plugin.base
+  label: 'Mapping for the base pattern formatter settings'
+  mapping:
+    variant:
+      type: string
+      label: 'Pattern variant'
+field_group.field_group_formatter_plugin.oe_whitelabel_helper_description_list_pattern:
+  type: field_group.field_group_formatter_plugin.oe_whitelabel_helper_pattern_base
+  label: 'Mapping for the description list pattern formatter settings'
+
+field_group.field_group_formatter_plugin.oe_whitelabel_helper_inpage_navigation_pattern:
+  type: field_group.field_group_formatter_plugin.oe_whitelabel_helper_pattern_base
+  label: 'Mapping for the inpage navigation pattern formatter settings'
+
+field.formatter.settings.oe_whitelabel_helper_gallery:
+  type: mapping
+  label: 'Gallery formatter settings'
+
+field.formatter.third_party.oe_whitelabel_helper:
+  type: mapping
+  label: 'OpenEuropa Whitelabel Helper third party setting'
+  mapping:
+    pattern_mapping:
+      type: string
+      label: 'To which gallery item property the field is mapped.'

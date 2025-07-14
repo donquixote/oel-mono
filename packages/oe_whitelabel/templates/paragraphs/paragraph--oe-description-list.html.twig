@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Theme override to display the 'Description list' #type paragraph.
+ *
+ * @see ./modules/contrib/paragraphs/templates/paragraph.html.twig
+ */
+#}
+
+{% if title is not empty %}
+  {% include '@oe-bcl/bcl-heading/heading.html.twig' with {
+    title: title,
+  } only %}
+{% endif %}
+
+{{ pattern('description_list', {
+  'items': items,
+  'orientation': orientation,
+  'attributes': attributes,
+}) }}

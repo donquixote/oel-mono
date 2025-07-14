@@ -1,0 +1,131 @@
+<?php
+
+/**
+ * @file
+ * The OE Whitelabel Helper module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FormatterInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\oe_whitelabel\SlimSelectHelper;
+
+/**
+ * Implements hook_locale_translation_projects_alter().
+ */
+function oe_whitelabel_helper_locale_translation_projects_alter(&$projects) {
+  $projects['oe_whitelabel_helper']['info']['interface translation server pattern'] = \Drupal::service('extension.list.module')->getPath('oe_whitelabel_helper') . '/translations/%project-%language.po';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function oe_whitelabel_helper_theme($existing, $type, $theme, $path) {
+  return [
+    'oe_whitelabel_helper_address_inline' => [
+      'variables' => [
+        'address' => NULL,
+        'address_items' => [],
+        'address_delimiter' => NULL,
+      ],
+    ],
+    'oe_corporate_blocks_neutral_footer' => [
+      'variables' => [
+        'corporate_footer' => [],
+        'site_specific_footer' => [],
+      ],
+      'preprocess functions' => [
+        'oe_corporate_blocks_preprocess_set_site_owner',
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_field_formatter_third_party_settings_form().
+ */
+function oe_whitelabel_helper_field_formatter_third_party_settings_form(FormatterInterface $plugin, FieldDefinitionInterface $field_definition, $view_mode, array $form, FormStateInterface $form_state) {
+  $element = [];
+
+  if ($view_mode !== 'oe_w_pattern_gallery_item') {
+    return $element;
+  }
+
+  $element['pattern_mapping'] = [
+    '#type' => 'select',
+    '#title' => t('Use this field for'),
+    '#options' => [
+      'caption_title' => t('Caption title'),
+      'caption' => t('Caption'),
+      'thumbnail' => t('Thumbnail'),
+      'media' => t('Media'),
+    ],
+    '#empty_value' => '',
+    '#default_value' => $plugin->getThirdPartySetting('oe_whitelabel_helper', 'pattern_mapping', ''),
+  ];
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary_alter().
+ */
+function oe_whitelabel_helper_field_formatter_settings_summary_alter(array &$summary, array $context) {
+  if ($context['view_mode'] !== 'oe_w_pattern_gallery_item') {
+    return;
+  }
+
+  $mapping = $context['formatter']->getThirdPartySetting('oe_whitelabel_helper', 'pattern_mapping');
+  if ($mapping) {
+    // @todo We should show labels.
+    $summary[] = t('Gallery pattern: mapped to @field.', [
+      '@field' => $mapping,
+    ]);
+  }
+}
+
+/**
+ * Implements hook_requirements_alter().
+ */
+function oe_whitelabel_helper_requirements_alter(array &$requirements): void {
+  \Drupal::classResolver(SlimSelectHelper::class)->alterRequirements($requirements);
+}
+
+/**
+ * Implements hook_field_group_pre_render().
+ */
+function oe_whitelabel_helper_field_group_pre_render(array &$element, $group, $rendering_object) {
+  // Add view mode to the group element information, but only if the value was
+  // not already present.
+  if (empty($element['#mode'])) {
+    $element['#mode'] = $group->mode;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for field_group_html_element.
+ */
+function oe_whitelabel_helper_theme_suggestions_field_group_html_element_alter(array &$suggestions, array $variables) {
+  // Add suggestions based on view mode, if present.
+  $element = $variables['element'];
+  if (empty($element['#mode'])) {
+    return;
+  }
+
+  $name = !empty($element['#group_name']) ? $element['#group_name'] : NULL;
+  $entity_type = !empty($element['#entity_type']) ? $element['#entity_type'] : NULL;
+  $bundle = !empty($element['#bundle']) ? $element['#bundle'] : NULL;
+  $mode = $element['#mode'];
+  $hook = 'field_group_html_element';
+
+  // Execute the same checks as in field_group_theme_suggestions_alter().
+  if (!empty($entity_type) && !empty($name)) {
+    $suggestions[] = $hook . '__' . $entity_type . '__' . $mode . '__' . $name;
+  }
+
+  if (!empty($entity_type) && !empty($bundle) && !empty($name)) {
+    $suggestions[] = $hook . '__' . $entity_type . '__' . $bundle . '__' . $mode . '__' . $name;
+  }
+}

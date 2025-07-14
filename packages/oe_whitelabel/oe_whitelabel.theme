@@ -1,0 +1,299 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Template\AttributeHelper;
+use Drupal\oe_bootstrap_theme_helper\EuropeanUnionLanguages;
+use Drupal\oe_whitelabel\DocumentMediaWrapper;
+use Drupal\oe_whitelabel\SlimSelectHelper;
+
+// Include all files from the includes directory.
+$includes_path = __DIR__ . '/includes/*.inc';
+foreach (glob($includes_path) as $filename) {
+  // The inspection disallowing basename() is not relevant for known paths.
+  // phpcs:ignore QualityAssurance.Functions.DrupalWrappers.FoundWithAlternative
+  require_once __DIR__ . '/includes/' . basename($filename);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function oe_whitelabel_form_system_theme_settings_alter(&$form, FormStateInterface &$form_state, $form_id = NULL) {
+  $form['component_library'] = [
+    '#type' => 'select',
+    '#title' => t('Component library'),
+    '#options' => [
+      'neutral' => t('Neutral'),
+      'ec' => t('European Commission'),
+      'eu' => t('European Union'),
+    ],
+    '#default_value' => theme_get_setting('component_library') ?? 'neutral',
+    '#description' => t('Choose "European Commission" for websites hosted under the ec.europa.eu domain and "European Union" for websites hosted under the europa.eu domain.'),
+  ];
+  $form['header_style'] = [
+    '#type' => 'select',
+    '#title' => t('Background style'),
+    '#options' => [
+      'standard' => t('Blue header'),
+      'light' => t('Light header'),
+    ],
+    '#default_value' => theme_get_setting('header_style'),
+    '#description' => t('Choose the header color'),
+  ];
+  $form['slim_select'] = [
+    '#type' => 'details',
+    '#title' => t('Slim Select'),
+    '#open' => TRUE,
+    '#tree' => TRUE,
+  ];
+  $form['slim_select']['all_select_elements'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Enable for all select elements'),
+    '#description' => t('By default Slim Select is applied only to <code>&lt;select&gt;</code> elements with the <code>multiple="true"</code> attribute. Enabling this option will apply Slim Select to all <code>&lt;select&gt;</code> elements, regardless of this attribute.'),
+    '#default_value' => theme_get_setting('slim_select.all_select_elements'),
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function oe_whitelabel_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+  $element = $variables['element'];
+  $sanitized_view_mode = strtr($element['#view_mode'], '.', '_');
+
+  // Add a suggestion which takes into account entity type, bundle and view
+  // mode.
+  $view_mode_suggestion = 'field__' . $element['#entity_type'] . '__' . $element['#bundle'] . '__' . $sanitized_view_mode;
+
+  // Search for the suggestion formed by entity type and bundle. Since field
+  // suggestions are ordered by priority, we need to add new ones in the correct
+  // order. The last ones in the list are field specific templates, which should
+  // have a higher priority.
+  $bundle_suggestion = 'field__' . $element['#entity_type'] . '__' . $element['#bundle'];
+  $position = array_search($bundle_suggestion, $suggestions);
+
+  if ($position === FALSE) {
+    // The bundle suggestion comes from system_theme_suggestions_field(), so
+    // it should be there but take into account scenarios where it was removed
+    // by another alter hook.
+    $suggestions[] = $view_mode_suggestion;
+  }
+  else {
+    array_splice($suggestions, $position, 1, [
+      $bundle_suggestion,
+      $view_mode_suggestion,
+    ]);
+  }
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function oe_whitelabel_preprocess(&$variables) {
+  $variables['bcl_component_library'] = theme_get_setting('component_library') ?? 'neutral';
+  $variables['bcl_header_style'] = theme_get_setting('header_style') ?? 'standard';
+  $variables['current_language_id'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['bcl_logo_path'] = base_path() . \Drupal::service('extension.list.theme')->getPath('oe_bootstrap_theme') . '/assets/logos/';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for field template.
+ */
+function oe_whitelabel_preprocess_field(&$variables, $hook, $info) {
+  // Core doesn't merge the title attributes from render elements back into
+  // the variables attributes.
+  // @see template_preprocess()
+  if (isset($info['render element'])) {
+    $key = $info['render element'];
+    if (isset($variables[$key]['#title_attributes'])) {
+      $variables['title_attributes'] = AttributeHelper::mergeCollections($variables['title_attributes'], $variables[$key]['#title_attributes']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function oe_whitelabel_preprocess_page(&$variables) {
+  $site_logo_href = '';
+  if ($variables['bcl_component_library'] === 'ec') {
+    $variables['logo_aria_label'] = t('Home') . ' - ' . t('European Commission');
+    $variables['site_logo_alt'] = t('European Commission logo');
+    $variables['site_logo_title'] = t('European Commission');
+    $site_logo_href = 'https://ec.europa.eu/info';
+  }
+  elseif ($variables['bcl_component_library'] === 'eu') {
+    $variables['logo_aria_label'] = t('Home - European Union');
+    $variables['site_logo_alt'] = t('European Union flag');
+    $variables['site_logo_title'] = t('European Union');
+    $site_logo_href = 'https://european-union.europa.eu';
+  }
+  else {
+    $site_config = \Drupal::config('system.site');
+    $variables['site_name'] = $site_config->get('name');
+    $variables['site_logo_url'] = \Drupal::service('file_url_generator')->generateString(theme_get_setting('logo.url'));
+    $variables['logo_aria_label'] = t('Home');
+    $variables['site_logo_alt'] = t('Home logo');
+    $variables['site_logo_title'] = t('Home');
+  }
+
+  if ($variables['bcl_component_library'] === 'neutral') {
+    return;
+  }
+  // Provide correct icon for non-eu languages.
+  $language_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  if (!EuropeanUnionLanguages::hasLanguage($language_code)) {
+    if ($language_code === 'nb') {
+      // Set correct icon for Norwegian language.
+      $variables['current_language_id'] = 'no';
+    }
+    else {
+      // Check whether BCL provides a logo for the language.
+      $bcl_logo = $variables['bcl_logo_path'] . '/' . $variables['bcl_component_library'] . '/';
+      $bcl_logo .= 'logo-' . $variables['bcl_component_library'] . '--' . $language_code . '.svg';
+      if (!file_exists($bcl_logo)) {
+        // Provide fallback "en" icon if language logo doesn't exist.
+        $variables['current_language_id'] = 'en';
+      }
+    }
+  }
+  else {
+    $site_logo_href .= '/index_' . EuropeanUnionLanguages::getInternalLanguageCode($variables['current_language_id']);
+  }
+  $variables['site_logo_href'] = $site_logo_href;
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function oe_whitelabel_preprocess_html(array &$variables) {
+  $cck_container = [
+    '#type' => 'html_tag',
+    '#tag' => 'div',
+    '#attributes' => [
+      'id' => 'cck_here',
+      'role' => 'alert',
+    ],
+  ];
+
+  $variables['page_top']['cck_container'] = $cck_container;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for document media bundle.
+ */
+function oe_whitelabel_preprocess_media__document__default(&$variables) {
+  /** @var \Drupal\media\Entity\Media $media */
+  $media = $variables['media'];
+
+  $wrapper = new DocumentMediaWrapper($media);
+  if ($wrapper->isEmpty()) {
+    return;
+  }
+
+  $variables['file'] = $wrapper->toFileValueObject();
+
+  // Generate the file information for all available translations.
+  foreach ($media->getTranslationLanguages() as $langcode => $language) {
+    // We don't want to include the information of the current language again.
+    if ($media->language()->getId() === $langcode) {
+      continue;
+    }
+
+    $translation = $media->getTranslation($langcode);
+    $wrapper = new DocumentMediaWrapper($translation);
+    if ($wrapper->isEmpty()) {
+      continue;
+    }
+    $variables['translations'][] = $wrapper->toFileValueObject();
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function oe_whitelabel_element_info_alter(array &$info): void {
+  $module_handler = \Drupal::service('module_handler');
+
+  if (isset($info['select']) && $module_handler->moduleExists('slim_select')) {
+    $info['select']['#process'][] = '_oe_whitelabel_process_element_select';
+  }
+}
+
+/**
+ * Process callback for applying slim_select on elements.
+ *
+ * @param array $element
+ *   The element to alter.
+ *
+ * @return array
+ *   The altered element.
+ *
+ * @see oe_whitelabel_element_info_alter
+ */
+function _oe_whitelabel_process_element_select(array &$element): array {
+  $all_select_elements = theme_get_setting('slim_select.all_select_elements');
+  if (!$all_select_elements && !$element['#multiple']) {
+    return $element;
+  }
+  if ($element['#multiple']) {
+    $element['#attributes']['class'][] = 'multi-select';
+  }
+  $element += [
+    '#slim_select' => [
+      'contentPosition' => 'fixed',
+    ],
+  ];
+
+  return $element;
+}
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function oe_whitelabel_library_info_alter(array &$libraries, string $extension): void {
+  \Drupal::classResolver(SlimSelectHelper::class)->libraryInfoAlter($libraries, $extension);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for user subscription page.
+ */
+function oe_whitelabel_preprocess_oe_subscriptions_user_subscriptions_page(&$variables) {
+  // The content banner embeds the current page title, so we need to retrieve
+  // it manually.
+  $variables['page_title'] = \Drupal::service('title_resolver')->getTitle(
+    \Drupal::service('request_stack')->getCurrentRequest(),
+    \Drupal::service('current_route_match')->getCurrentRouteMatch()->getRouteObject()
+  );
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oe_whitelabel_preprocess_oe_corporate_blocks_neutral_footer(array &$variables): void {
+  if (!function_exists('oe_corporate_blocks_preprocess_set_accessibility_link')) {
+    return;
+  }
+
+  oe_corporate_blocks_preprocess_set_accessibility_link($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oe_whitelabel_preprocess_oe_corporate_blocks_eu_footer(&$variables): void {
+  if (!empty($variables['accessibility_link'])) {
+    foreach ($variables['corporate_footer']['legal_links'] as $index => $link) {
+      if (str_starts_with($link['href'], 'https://european-union.europa.eu/accessibility-statement')) {
+        unset($variables['corporate_footer']['legal_links'][$index]);
+        break;
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Theme override to display the 'banner' type paragraph.
+ *
+ * @see ./modules/contrib/paragraphs/templates/paragraph.html.twig
+ */
+#}
+{% if url %}
+  {% set _call_to_action = {
+    'label': label,
+    'path': url,
+    'attributes': create_attribute({
+      'class': [
+        'btn',
+        variant == 'primary' ? 'btn-light' : 'btn-primary',
+      ],
+    }),
+    'icon': {
+      'name': 'chevron-right',
+      'size': 'fluid',
+      'path': bcl_icon_path,
+    },
+  } %}
+{% endif %}
+{% set _hero = 'hero' in pattern %}
+{% set _shade = 'shade' in variant %}
+{{ pattern('banner', {
+  'variant': variant,
+  'title': title,
+  'description': description,
+  'call_to_action': _call_to_action,
+  'image': image.src,
+  'hero': _hero,
+  'shade': _shade,
+  'full_width': full_width,
+  'centered': centered,
+  'attributes': attributes,
+}) }}
+

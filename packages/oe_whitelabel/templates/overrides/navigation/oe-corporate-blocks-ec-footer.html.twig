@@ -1,0 +1,75 @@
+{% extends "@oe_whitelabel/overrides/navigation/oe-corporate-blocks-neutral-footer.html.twig" %}
+
+{% if corporate_footer.service_navigation %}
+  {% set _social_links = corporate_footer.service_navigation %}
+{% else %}
+  {% set _social_links = corporate_footer.social_media_common_links %}
+{% endif %}
+{% block content %}
+  {% set _top_sections =  {
+    'extra_classes': 'pt-4 pt-lg-5',
+    'cols': [
+      {
+        'classes': 'col-12 col-lg-4',
+        'items': [
+        {
+          'type': 'content',
+          'content': footer_top_left_content,
+        },
+      ],
+      },
+      {
+        'classes': 'col-12 col-lg-4 pb-4 pb-lg-0',
+        'items': _section_2,
+      },
+      {
+        'classes': 'col-12 col-lg-4',
+        'items': _section_3,
+      }
+    ],
+  } %}
+
+  {% set site_identity_content %}
+    <p class="fw-bold pb-2 mb-2">{{ 'European Commission'|t }}</p>
+  {% endset %}
+
+  {% set _bottom_sections =  {
+    'extra_classes': 'pb-4 pb-lg-5 bcl-footer__bordered-row row mt-4',
+    'cols': [
+      {
+        'classes': 'col-12 col-lg-4 pb-lg-4',
+        'items': [
+        {
+          'type': 'content',
+          'content': site_identity_content,
+        },
+      ],
+      },
+      {
+        'classes': 'col-12 col-lg-4',
+        'items': [
+        {
+          'type': 'links',
+          'links': bcl_footer_links(_social_links),
+        }
+      ],
+      },
+      {
+        'classes': 'col-12 col-lg-4',
+        'items': [
+        {
+          'type': 'links',
+          'links': bcl_footer_links(corporate_footer.legal_navigation),
+        }
+      ],
+      }
+    ],
+  } %}
+
+  {% include '@oe-bcl/footer' with {
+    'variant': 'ec',
+    'rows': [_top_sections, _bottom_sections],
+    'attributes': attributes,
+  } only %}
+{% endblock %}
+

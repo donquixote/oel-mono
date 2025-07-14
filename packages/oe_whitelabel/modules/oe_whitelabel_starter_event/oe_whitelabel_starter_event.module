@@ -1,0 +1,218 @@
+<?php
+
+/**
+ * @file
+ * OE Whitelabel theme Event.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Template\Attribute;
+use Drupal\media\MediaInterface;
+use Drupal\media\Plugin\media\Source\Image;
+use Drupal\media_avportal\Plugin\media\Source\MediaAvPortalPhotoSource;
+use Drupal\oe_bootstrap_theme\ValueObject\ImageValueObject;
+
+/**
+ * Implements template_preprocess_node() for the Event node type.
+ */
+function oe_whitelabel_starter_event_preprocess_node__oe_sc_event__full(&$variables) {
+  _oe_whitelabel_starter_event_preprocess_inpage_nav($variables);
+}
+
+/**
+ * Implements template_preprocess_node() for the Event node type.
+ */
+function oe_whitelabel_starter_event_preprocess_node__oe_sc_event__oe_w_content_banner(&$variables) {
+  _oe_whitelabel_starter_event_preprocess_featured_media($variables);
+  _oe_whitelabel_starter_event_preprocess_links($variables);
+}
+
+/**
+ * Helper function to preprocess the content banner links.
+ *
+ * @param array $variables
+ *   Render array variables.
+ */
+function _oe_whitelabel_starter_event_preprocess_links(array &$variables): void {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+  $registration_url = $node->get('oe_sc_event_registration_url');
+
+  // Bail out if there is no link item.
+  if ($registration_url->isEmpty()) {
+    return;
+  }
+
+  $attributes = new Attribute([
+    'class' => [
+      'btn',
+      'btn-primary',
+      'd-block',
+      'd-md-inline-block',
+      'text-white',
+    ],
+  ]);
+  $url = $registration_url->first()->getUrl();
+
+  if ($url->isExternal()) {
+    $attributes->setAttribute('target', '_blank');
+  }
+
+  $variables['links'] = [
+    [
+      'label' => t('Register'),
+      'path' => $url,
+      'icon_position' => 'before',
+      'icon' => [
+        'name' => 'calendar-check',
+        'path' => $variables['bcl_icon_path'],
+      ],
+      'attributes' => $attributes,
+    ],
+  ];
+}
+
+/**
+ * Implements template_preprocess_node() for the Event node type.
+ */
+function oe_whitelabel_starter_event_preprocess_node__oe_sc_event__teaser(&$variables) {
+  _oe_whitelabel_starter_event_preprocess_date($variables);
+}
+
+/**
+ * Helper function to preprocess the Featured media field.
+ *
+ * @param array $variables
+ *   Render array variables.
+ */
+function _oe_whitelabel_starter_event_preprocess_featured_media(array &$variables): void {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  // Bail out if there is no media present.
+  if ($node->get('oe_featured_media')->isEmpty()) {
+    return;
+  }
+
+  /** @var \Drupal\media\Entity\Media $media */
+  $media = $node->get('oe_featured_media')->entity;
+  if (!$media instanceof MediaInterface) {
+    // The media entity is not available anymore, bail out.
+    return;
+  }
+
+  // Retrieve the correct media translation.
+  /** @var \Drupal\media\Entity\Media $media */
+  $media = \Drupal::service('entity.repository')->getTranslationFromContext($media, $node->language()->getId());
+
+  // Caches are handled by the formatter usually. Since we are not rendering
+  // the original render arrays, we need to propagate our caches to the
+  // template.
+  $cacheability = CacheableMetadata::createFromRenderArray($variables);
+  $cacheability->addCacheableDependency($media);
+
+  // Run access checks on the media entity.
+  $access = $media->access('view', $variables['user'], TRUE);
+  $cacheability->addCacheableDependency($access);
+  if (!$access->isAllowed()) {
+    $cacheability->applyTo($variables);
+    return;
+  }
+
+  // Get the media source.
+  $source = $media->getSource();
+  $is_image = $source instanceof MediaAvPortalPhotoSource || $source instanceof Image;
+
+  // If it's not an image bail out.
+  if (!$is_image) {
+    $cacheability->applyTo($variables);
+    return;
+  }
+
+  $thumbnail = $media->get('thumbnail')->first();
+  $variables['image'] = ImageValueObject::fromImageItem($thumbnail);
+
+  $cacheability->applyTo($variables);
+}
+
+/**
+ * Helper function to preprocess the inpage navigation pattern fields.
+ *
+ * @param array $variables
+ *   Render array variables.
+ */
+function _oe_whitelabel_starter_event_preprocess_inpage_nav(array &$variables): void {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  if ($node->get('body')->isEmpty() && $node->get('oe_documents')->isEmpty()) {
+    return;
+  }
+
+  $variables['inpage_navigation_links'] = [];
+  $fields = ['oe_documents', 'body'];
+  foreach ($variables['content'] as &$item) {
+    if (!array_key_exists('#field_name', $item)) {
+      continue;
+    }
+
+    if (!in_array($item['#field_name'], $fields)) {
+      continue;
+    }
+
+    $unique_id = Html::getUniqueId('oe-content--' . $item['#field_name']);
+    $item['#attributes'] = ['id' => $unique_id];
+    $variables['inpage_navigation_links'][] = [
+      'path' => '#' . $unique_id,
+      'label' => $node->{$item['#field_name']}->getFieldDefinition()->getLabel(),
+    ];
+  }
+}
+
+/**
+ * Helper function to preprocess the date field.
+ *
+ * @param array $variables
+ *   Render array variables.
+ */
+function _oe_whitelabel_starter_event_preprocess_date(array &$variables): void {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  if ($node->get('oe_sc_event_dates')->isEmpty()) {
+    return;
+  }
+
+  // Displayed date depends on the timezone.
+  $cache = CacheableMetadata::createFromRenderArray($variables);
+  $cache->addCacheContexts(['timezone']);
+  $cache->applyTo($variables);
+
+  $dates = $node->get('oe_sc_event_dates')->first();
+  $start = $dates->get('start_date')->getValue()->getTimestamp();
+  /** @var \Drupal\Core\Datetime\DateFormatterInterface $date_formatter */
+  $date_formatter = \Drupal::service('date.formatter');
+
+  $variables['date_block'] = [
+    'year' => $date_formatter->format($start, '', 'Y'),
+    'month' => $date_formatter->format($start, '', 'M'),
+    'day' => $date_formatter->format($start, '', 'd'),
+    'date_time' => $date_formatter->format($start, '', 'Y-m-d'),
+  ];
+
+  $end = $dates->get('end_date')->getValue()->getTimestamp();
+
+  if (!empty($end) && $variables['date_block']['date_time'] !== $date_formatter->format($end, '', 'Y-m-d')) {
+    $variables['date_block'] += [
+      'end_month' => $date_formatter->format($end, '', 'M'),
+      'end_day' => $date_formatter->format($end, '', 'd'),
+    ];
+
+    if ($date_formatter->format($start, '', 'Y') !== $date_formatter->format($end, '', 'Y')) {
+      $variables['date_block']['end_year'] = $date_formatter->format($end, '', 'Y');
+    }
+  }
+}

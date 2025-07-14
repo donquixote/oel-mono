@@ -1,0 +1,26 @@
+name: OpenEuropa Whitelabel Theme Helper
+type: module
+description: OpenEuropa Whitelabel Theme helpers and tools.
+package: OpenEuropa Whitelabel Theme
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - drupal:node
+  - twig_field_value:twig_field_value
+  - daterange_compact:daterange_compact
+  - oe_bootstrap_theme:oe_bootstrap_theme_helper
+  - openeuropa:oe_corporate_blocks
+
+'interface translation project': oe_whitelabel_helper
+
+config_devel:
+  install:
+    - core.entity_view_mode.node.oe_w_content_banner
+    - daterange_compact.format.oe_whitelabel_date_only_short_month
+    - daterange_compact.format.oe_whitelabel_date_time_long
+  optional:
+    - core.entity_view_mode.media.oe_w_pattern_gallery_item
+    - core.entity_view_display.media.av_portal_photo.oe_w_pattern_gallery_item
+    - core.entity_view_display.media.av_portal_video.oe_w_pattern_gallery_item
+    - core.entity_view_display.media.image.oe_w_pattern_gallery_item
+    - core.entity_view_display.media.remote_video.oe_w_pattern_gallery_item

@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Override for blocks with plugin id = 'oe_authentication_login_block'.
+ *
+ * @see \Drupal\oe_authentication\Plugin\Block\LoginBlock
+ */
+#}
+{% set extra_attributes = create_attribute() %}
+{% set extra_attributes = extra_attributes.addClass([
+  'text-center'
+]) %}
+
+{% set title = content['#title']|render %}
+{% set link_title %}
+  <span class="d-block d-lg-inline-block">{{ title }}</span>
+{% endset %}
+
+<div class="oe-authentication nav-link">
+  {{ pattern('link', {
+    label: link_title,
+    path: content['#url']|render,
+    icon: {
+      name: 'person-fill',
+      size: 'xs',
+    },
+    icon_position: 'before',
+    standalone: true,
+    attributes: extra_attributes
+  }) }}
+</div>

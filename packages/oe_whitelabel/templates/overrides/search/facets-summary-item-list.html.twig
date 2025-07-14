@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme implementation for a facets summary item list in oe_whitelabel.
+ *
+ * @see ./modules/contrib/facets/modules/facets_summary/templates/facets-summary-item-list.html
+ *
+ */
+#}
+{%- if items -%}
+  {%- for item in items -%}
+    {{ item.value }}
+  {%- endfor -%}
+{%- else -%}
+  {{- empty -}}
+{%- endif -%}

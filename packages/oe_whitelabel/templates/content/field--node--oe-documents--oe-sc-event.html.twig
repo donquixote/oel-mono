@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * Template for event documents field.
+ */
+#}
+{%
+  set classes = [
+  bundle|clean_class ~ '__' ~ field_name_clean|clean_class,
+  label_display == 'inline' ? 'd-flex',
+]
+%}
+{%
+  set title_classes = [
+  'field__label',
+  label_display == 'visually_hidden' ? 'visually-hidden',
+]
+%}
+
+{% if label_hidden %}
+  {% if multiple %}
+    <div{{ attributes.addClass(classes) }}>
+      {% for item in items %}
+        <div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes.addClass(classes) }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <div{{ attributes.addClass(classes) }}>
+    {%- set _label -%}
+      {{- label -}}{%- if label_display == 'inline' -%}<span class="me-1">:</span>{%- endif -%}
+    {%- endset -%}
+    {% include '@oe-bcl/bcl-heading/heading.html.twig' with {
+      title: _label,
+      attributes: create_attribute().addClass(title_classes)
+    } only %}
+    {% if multiple %}
+    <div class="field__items">
+      {% endif %}
+      {% for item in items %}
+        <div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
+      {% endfor %}
+      {% if multiple %}
+    </div>
+    {% endif %}
+  </div>
+{% endif %}

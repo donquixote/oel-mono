@@ -1,0 +1,45 @@
+.selected-filters-block .badge {
+  text-align: left;
+  white-space: normal;
+  line-height: var(--bs-body-line-height);
+}
+
+.oe-list-pages-sort-form {
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+}
+
+.oe-list-pages-sort-form .form-item {
+  margin: 0 0 0 1.5rem;
+}
+.oe-list-pages-sort-form .form-label,
+.oe-list-pages-sort-form .form-select {
+  display: inline-block;
+  width: auto;
+}
+
+.oe-list-pages-sort-form .form-label {
+  margin-right: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .oe-list-pages-sort-form {
+    display: block;
+  }
+
+  .oe-list-pages-sort-form .form-item {
+    margin: 0;
+  }
+
+  .oe-list-pages-sort-form .form-label,
+  .oe-list-pages-sort-form .form-select {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .oe-list-pages-sort-form .form-select {
+    max-width: 160px;
+  }
+}

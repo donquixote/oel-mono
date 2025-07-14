@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Override for blocks with plugin id = 'facets_summary_block'.
+ *
+ * @see \Drupal\facets_summary\Plugin\Block\FacetsSummaryBlock
+ */
+#}
+{% if label and content['#items'][0]['#theme'] is defined and content['#items'][0]['#theme'] == 'facets_summary_count' %}
+  {% set results_count = content['#items'][0] %}
+{% endif %}
+{% block content %}
+  {% apply spaceless %}
+    {{ title_prefix }}
+    {% if label %}
+      <div class="col-md-6 col-lg-8 align-self-center">
+        <h2 class="mb-0 fs-4">
+          <span class="text-capitalize">{{ label }} </span>
+          {{ results_count }}
+        </h2>
+      </div>
+    {% endif %}
+    {{ title_suffix }}
+    <div class="col-md-12 order-md-2 mt-3 selected-filters-block">
+      {{ content }}
+    </div>
+  {% endapply %}
+{% endblock %}
