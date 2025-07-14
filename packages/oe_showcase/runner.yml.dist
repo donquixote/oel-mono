@@ -1,0 +1,76 @@
+drupal:
+  root: "build"
+  base_url: "http://web:8080/build"
+  site:
+    name: "OpenEuropa"
+    profile: "oe_showcase"
+  database:
+    host: "mysql"
+    port: "3306"
+    name: "oe_showcase"
+    user: "root"
+    password: ""
+  sparql:
+    host: "sparql"
+    port: "8890"
+  post_install:
+    # Move file assets.
+    - "cp -R modules/oe_showcase_default_content/content/default_images/. build/sites/default/files/."
+    # Index content.
+    - "./vendor/bin/drush sapi-i"
+    # Enable development related modules.
+    - "./vendor/bin/drush en config_devel oe_authentication_eulogin_mock -y"
+    # Import translation.
+    - "./vendor/bin/drush cr"
+    - "./vendor/bin/drush oe-multilingual:import-local-translations"
+  settings:
+    settings:
+      file_scan_ignore_directories:
+        - "node_modules"
+        - "bower_components"
+        - "vendor"
+        - "${drupal.root}"
+      file_private_path: "sites/default/files/private"
+    databases:
+      sparql_default:
+        default:
+          prefix: ""
+          host: ${drupal.sparql.host}
+          port: ${drupal.sparql.port}
+          namespace: 'Drupal\sparql_entity_storage\Driver\Database\sparql'
+          driver: 'sparql'
+
+selenium:
+  host: "http://selenium"
+  port: "4444"
+  browser: "chrome"
+
+commands:
+  drupal:site-setup:
+    - { task: "run", command: "drupal:symlink-project" }
+    - { task: "run", command: "drupal:drush-setup" }
+    - { task: "run", command: "drupal:settings-setup" }
+    - { task: "run", command: "setup:phpunit" }
+    - { task: "run", command: "setup:sendmail" }
+  setup:phpunit:
+    - { task: "process", source: "phpunit.xml.dist", destination: "phpunit.xml" }
+    # Generate settings.testing.php, it will be used when running functional tests.
+    - { task: "process-php", type: "write", config: "drupal.settings", source: "${drupal.root}/sites/default/default.settings.php", destination: "${drupal.root}/sites/default/settings.testing.php", override: true }
+  setup:sendmail:
+    - task: "append"
+      file: "build/sites/default/settings.override.php"
+      text: |
+        // Configure the mailer module to use Mailpit.
+        // Note: never use direct SMTP connection for production websites!
+        // Direct connection will impact the page speed as mails will be sent
+        // synchronously.
+        $config['symfony_mailer.mailer_transport.sendmail']['plugin'] = 'smtp';
+        $config['symfony_mailer.mailer_transport.sendmail']['configuration']['user']='';
+        $config['symfony_mailer.mailer_transport.sendmail']['configuration']['pass']='';
+        $config['symfony_mailer.mailer_transport.sendmail']['configuration']['host']='mailpit';
+        $config['symfony_mailer.mailer_transport.sendmail']['configuration']['port']='1025';
+  ci:site-setup:
+    - task: "append"
+      file: "build/sites/default/settings.php"
+      text: |
+        $settings['extension_discovery_scan_tests'] = TRUE;

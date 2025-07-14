@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Theme override for user in 'full' view mode.
+ */
+#}
+{% apply spaceless %}
+<article{{ attributes }}>
+  {# Combine margin and padding for precise spacing. #}
+  <div class="mx-md-4 w-100">
+    {% set _field_bio %}
+      <div class="pe-md-3-5">{{ content.field_bio|field_value }}</div>
+    {% endset %}
+    {{ pattern('content_banner', {
+      image: image,
+      title: content.field_first_name|field_value|render ~ ' ' ~ content.field_last_name|field_value|render,
+      meta: [
+        content.group_professional_information.field_organization|field_value,
+        content.group_professional_information.field_current_position|field_value,
+      ],
+      content: _field_bio,
+      attributes: create_attribute().addClass('mb-4', 'pb-3'),
+      card: {
+        attributes: create_attribute().addClass("px-4")
+      }
+    }) }}
+    {{ _self.description_list_section('Personal information', content.group_personal_information ?? {}) }}
+    {{ _self.description_list_section('Professional information', content.group_professional_information ?? {}) }}
+  </div>
+</article>
+
+{% macro description_list_section(group_label, group_content) %}
+  <section class="my-3">
+    {% set _items = [] %}
+    {% for _field_name, _field in group_content|filter((value, name) => name|first != '#' and value|field_value) %}
+      {% set _value %}
+        {{ _field|field_value|safe_join(', ') }}
+      {% endset %}
+      {% set _items = _items|merge([{
+        term: _field|field_label,
+        definition: _value,
+      }]) %}
+    {% endfor %}
+    {% if _items %}
+      {% include '@oe-bcl/bcl-heading/heading.html.twig' with {
+        title: group_label,
+        title_tag: 'h3',
+      } only %}
+      {{ pattern('description_list', {
+        orientation: 'horizontal',
+        items: _items,
+      }) }}
+    {% endif %}
+  </section>
+{% endmacro description_list_section %}
+{% endapply %}

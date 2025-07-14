@@ -1,0 +1,10 @@
+name: OpenEuropa Showcase Multilingual
+type: module
+description: OpenEuropa Showcase Multilingual.
+core_version_requirement: ^10
+package: OpenEuropa Showcase
+
+dependencies:
+  - drupal:config_translation
+  - openeuropa:oe_multilingual
+  - oe_whitelabel:oe_whitelabel_multilingual

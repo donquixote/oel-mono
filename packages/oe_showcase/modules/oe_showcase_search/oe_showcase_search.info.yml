@@ -1,0 +1,48 @@
+name: OpenEuropa Showcase Search
+type: module
+description: Provides a demo search content type and search functionality based on search_api.
+core_version_requirement: ^10
+package: OpenEuropa Showcase
+dependencies:
+  - better_exposed_filters:better_exposed_filters
+  - drupal:views
+  - facets_form_date_range:facets_form_date_range
+  - facets_form_live_total:facets_form_live_total
+  - facets_summary:facets_summary
+  - oe_content:oe_content
+  - oe_content_extra:oe_content_extra_project
+  - oe_list_pages:oe_list_pages_address
+  - oe_showcase_fields:oe_showcase_fields
+  - oe_starter_content:oe_starter_content_event
+  - oe_starter_content:oe_starter_content_news
+  - oe_starter_content:oe_starter_content_person
+  - oe_starter_content:oe_starter_content_publication
+  - search_api:search_api
+  - search_api_autocomplete:search_api_autocomplete
+  - search_api_db:search_api_db
+
+config_devel:
+  install:
+    - core.entity_form_display.node.oe_showcase_search_demo.default
+    - core.entity_view_display.node.oe_showcase_search_demo.default
+    - core.entity_view_display.node.oe_showcase_search_demo.search_result
+    - core.entity_view_display.node.oe_showcase_search_demo.teaser
+    - facets.facet.category
+    - facets.facet.published_on
+    - facets.facet_source.search_api__views_page__showcase_search__showcase_search_page
+    - facets_summary.facets_summary.showcase_summary
+    - field.field.node.oe_showcase_search_demo.body
+    - field.field.node.oe_showcase_search_demo.field_category
+    - field.field.node.oe_showcase_search_demo.field_image
+    - field.storage.node.field_category
+    - field.storage.node.field_image
+    - node.type.oe_showcase_search_demo
+    - pathauto.pattern.search_demo_url_alias_pattern
+    - search_api_autocomplete.search.showcase_search
+    - search_api.index.showcase_search_index
+    - search_api.server.showcase_search_server
+    - taxonomy.vocabulary.categories
+    - views.view.showcase_search
+  optional:
+    - block.block.showcase_header_search_form
+    - language.content_settings.node.oe_showcase_search_demo

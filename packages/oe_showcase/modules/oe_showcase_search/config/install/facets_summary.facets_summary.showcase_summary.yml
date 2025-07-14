@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.showcase_search_index
+    - views.view.showcase_search
+  module:
+    - search_api
+id: showcase_summary
+name: 'Showcase Summary'
+facets:
+  category:
+    checked: true
+    label: Category
+    separator: ', '
+    weight: 0
+    show_count: false
+  published_on:
+    checked: true
+    label: 'Published on'
+    separator: ', '
+    weight: 0
+    show_count: false
+facet_source_id: 'search_api:views_page__showcase_search__showcase_search_page'
+processor_configs:
+  hide_when_not_rendered:
+    processor_id: hide_when_not_rendered
+    weights:
+      build: '45'
+    settings: {  }
+  show_count:
+    processor_id: show_count
+    weights:
+      build: '5'
+    settings: {  }

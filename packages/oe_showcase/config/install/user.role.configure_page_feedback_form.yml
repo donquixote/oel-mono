@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - oe_webtools_page_feedback
+    - system
+    - toolbar
+id: configure_page_feedback_form
+label: 'Configure Page Feedback form'
+weight: 3
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access toolbar'
+  - 'administer webtools page feedback form'
+  - 'delete own files'
+  - 'view the administration theme'

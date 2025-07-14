@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - flag
+    - media
+    - oe_contact_forms
+    - oe_content_entity_organisation
+    - rdf_skos
+    - search_api_autocomplete
+    - system
+    - ui_patterns_library
+    - user_field_anonymize
+    - user_fields_visibility
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access corporate contact form'
+  - 'access patterns page'
+  - 'access user profiles'
+  - 'cancel account'
+  - 'delete own files'
+  - 'flag subscribe_node'
+  - 'set own profile fields visibility'
+  - 'set user profile anonymity'
+  - 'unflag subscribe_node'
+  - 'use search_api_autocomplete for showcase_search'
+  - 'view media'
+  - 'view published oe_organisation'
+  - 'view published skos concept entities'

@@ -1,0 +1,909 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: a170562d-55f5-48b5-9e11-7a61d7677873
+  bundle: oe_showcase_page
+  default_langcode: en
+  depends:
+    35b7b482-8668-4ac3-82c0-a43554dda051: media
+    36b24637-901a-46df-8e8d-b7bc0618a2fc: media
+    3ebdd3bc-44b7-42ec-9126-91ccd393ad6e: file
+    b833a7eb-c451-4001-8d6e-e7eb677499a8: file
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Example page'
+  created:
+    -
+      value: 1632391985
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /pages/example-page
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_body:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 55a63760-94a1-4f6f-b356-4558dc7c0c4d
+          bundle: oe_banner
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1637657509
+          behavior_settings:
+            -
+              value: {  }
+          oe_paragraphs_variant:
+            -
+              value: default
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_banner_full_width:
+            -
+              value: false
+          field_oe_banner_type:
+            -
+              value: page_center
+          field_oe_link:
+            -
+              uri: 'http://example.com'
+              title: 'Call to action'
+              options: {  }
+          field_oe_text:
+            -
+              value: 'Page banner centered'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: fcab206d-444b-4660-8dfb-50ac69c879d3
+          bundle: oe_text_feature_media
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1637657604
+          behavior_settings:
+            -
+              value: {  }
+          oe_paragraphs_variant:
+            -
+              value: default
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_link:
+            -
+              uri: 'http://example.com'
+              title: More..
+              options: {  }
+          field_oe_media:
+            -
+              entity: 35b7b482-8668-4ac3-82c0-a43554dda051
+          field_oe_plain_text_long:
+            -
+              value: 'Presentation of the credentials of the new Heads of Mission to Ursula von der Leyen, President of the European Commission'
+          field_oe_text_long:
+            -
+              value: "<p>Fusce gravida consequat magna volutpat bibendum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sodales suscipit arcu in dapibus. Curabitur felis ante, gravida ut rutrum non, pellentesque ut turpis. Ut ultricies diam id sapien feugiat, vehicula viverra leo luctus. Ut at dapibus arcu. Etiam hendrerit leo tincidunt mauris viverra iaculis. Duis quis leo maximus, ultricies dolor ac, venenatis enim.</p>\r\n"
+              format: rich_text
+          field_oe_title:
+            -
+              value: 'This is a text with featured media'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 85616ac9-5d86-4d31-b581-a8ab41196f16
+          bundle: oe_text_feature_media
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1637658937
+          behavior_settings:
+            -
+              value: {  }
+          oe_paragraphs_variant:
+            -
+              value: right_featured
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_feature_media_title:
+            -
+              value: 'Variant with text on the right side'
+          field_oe_media:
+            -
+              entity: 36b24637-901a-46df-8e8d-b7bc0618a2fc
+          field_oe_plain_text_long:
+            -
+              value: 'Euro with miniature figurines'
+          field_oe_text_long:
+            -
+              value: "<p>In mauris velit, tristique at turpis nec, ornare dapibus nunc. Vivamus quis quam tincidunt, tempor elit eget, maximus diam. Mauris ultrices lobortis quam, vel placerat tellus hendrerit in. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam diam odio, laoreet eget est ac, scelerisque suscipit lacus. Quisque et lectus nec purus auctor fringilla sit amet in erat. Ut non nisl porta, vehicula tortor vel, feugiat velit. Sed commodo ipsum sit amet ante vulputate, non bibendum lorem ultrices. Nulla sit amet orci viverra, molestie nibh sit amet, efficitur urna. Maecenas dapibus cursus sapien sit amet congue.</p>\r\n"
+              format: rich_text
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: a50dcd5a-9d4a-450b-8793-8e3b7acd3283
+          bundle: oe_quote
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1637659032
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_plain_text_long:
+            -
+              value: 'Fusce gravida consequat magna volutpat bibendum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.'
+          field_oe_text:
+            -
+              value: 'Curabitur Felis'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0ca11273-b489-4d9e-97da-897af91cdc29
+          bundle: oe_rich_text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1637659108
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_text_long:
+            -
+              value: "<p>In mauris velit, tristique at turpis nec, ornare dapibus nunc. Vivamus quis quam tincidunt, tempor elit eget, maximus diam. Mauris ultrices lobortis quam, vel placerat tellus hendrerit in. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam diam odio, laoreet eget est ac, scelerisque suscipit lacus. Quisque et lectus nec purus auctor fringilla sit amet in erat. Ut non nisl porta, vehicula tortor vel, feugiat velit. Sed commodo ipsum sit amet ante vulputate, non bibendum lorem ultrices. Nulla sit amet orci viverra, molestie nibh sit amet, efficitur urna. Maecenas dapibus cursus sapien sit amet congue.</p>\r\n"
+              format: rich_text
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 5c8c856d-419f-4a18-ae5c-ee74a2a41c32
+          bundle: oe_links_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1637659157
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_links:
+            -
+              uri: 'http://example.com'
+              title: 'Link example one'
+              options: {  }
+            -
+              uri: 'http://example.com'
+              title: 'Link example two'
+              options: {  }
+          field_oe_text:
+            -
+              value: 'This is a links block'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f17ed9dc-e985-4286-8ca0-e84440d892d5
+          bundle: oe_list_item_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1637659225
+          behavior_settings:
+            -
+              value: {  }
+          oe_paragraphs_variant:
+            -
+              value: default
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_list_item_block_layout:
+            -
+              value: two_columns
+          field_oe_paragraphs:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: e183d0e3-0394-4382-b458-c6b91cf56a70
+                  bundle: oe_list_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1637659225
+                  behavior_settings:
+                    -
+                      value: {  }
+                  oe_paragraphs_variant:
+                    -
+                      value: highlight
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_image:
+                    -
+                      entity: 3ebdd3bc-44b7-42ec-9126-91ccd393ad6e
+                      alt: Flag
+                      title: ''
+                      width: 1366
+                      height: 768
+                  field_oe_link:
+                    -
+                      uri: 'route:<nolink>'
+                      title: ''
+                      options: {  }
+                  field_oe_text_long:
+                    -
+                      value: 'Suspendisse consequat vulputate enim, at pretium justo elementum quis. Nullam tincidunt fringilla dui, fringilla tincidunt turpis feugiat vel. Ut luctus porta metus, fringilla efficitur lectus feugiat sed.'
+                      format: simple_rich_text
+                  field_oe_title:
+                    -
+                      value: 'Link item title one'
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 38b85759-d908-4c20-a552-3412edd54dab
+                  bundle: oe_list_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1637659509
+                  behavior_settings:
+                    -
+                      value: {  }
+                  oe_paragraphs_variant:
+                    -
+                      value: highlight
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_image:
+                    -
+                      entity: b833a7eb-c451-4001-8d6e-e7eb677499a8
+                      alt: flag
+                      title: ''
+                      width: 1920
+                      height: 1080
+                  field_oe_link:
+                    -
+                      uri: 'route:<nolink>'
+                      title: ''
+                      options: {  }
+                  field_oe_text_long:
+                    -
+                      value: 'Nunc placerat dolor lacus, eget tincidunt nunc dignissim eu. Praesent pretium metus est, ut dictum neque vulputate sit amet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.'
+                      format: simple_rich_text
+                  field_oe_title:
+                    -
+                      value: 'Link item title two'
+          field_oe_title:
+            -
+              value: 'This is a Listing item block'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b5aba02e-831a-45cd-bd37-d51fa7ced155
+          bundle: oe_accordion
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1637659699
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_paragraphs:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 959dc21d-99d7-416c-bc68-754a099d3dd5
+                  bundle: oe_accordion_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1637659699
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_icon:
+                    -
+                      value: arrow-down
+                  field_oe_text:
+                    -
+                      value: 'Integer ullamcorper elementum porta Vestibulum in maximus mauris'
+                  field_oe_text_long:
+                    -
+                      value: "<p>Nam accumsan ornare est, pulvinar mollis sapien. Aenean tristique, massa sit amet imperdiet malesuada, ligula magna interdum mauris, id hendrerit erat ante quis neque. Donec convallis arcu id efficitur scelerisque. Mauris quis massa semper nisi tempus gravida. Nunc scelerisque dolor nec sapien venenatis dapibus. Sed laoreet augue vel sapien luctus, in vestibulum lacus viverra. Aliquam viverra cursus dapibus. In hac habitasse platea dictumst. Aliquam quis massa sed orci pulvinar congue id sit amet ante. Sed vestibulum tincidunt nunc, in laoreet est dictum sit amet. Nulla sit amet mollis tortor, et tincidunt massa. Pellentesque feugiat velit quis nulla interdum, id efficitur odio commodo. Mauris sed bibendum nunc. Donec nec nisl consectetur, lacinia dui vel, rutrum lorem.</p>\r\n"
+                      format: rich_text
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 9fc14d54-7407-44f3-83fb-69dda3693362
+                  bundle: oe_accordion_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1637659742
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_icon:
+                    -
+                      value: arrow-down
+                  field_oe_text:
+                    -
+                      value: 'Sed molestie nisl nunc, ut euismod dolor posuere et'
+                  field_oe_text_long:
+                    -
+                      value: "<p>Nullam semper molestie lectus in ultricies. Vestibulum vel odio ipsum. Praesent at aliquam dolor. Donec consectetur lectus sed mi viverra, quis facilisis arcu euismod. Vivamus pharetra orci non elementum finibus. Pellentesque nec ultrices ex.</p>\r\n"
+                      format: rich_text
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: cea50428-0f7c-4177-85e8-0fd58db56e48
+                  bundle: oe_accordion_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1637659759
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_icon:
+                    -
+                      value: arrow-down
+                  field_oe_text:
+                    -
+                      value: 'Ut magna turpis, imperdiet non nunc eu, maximus vestibulum urna'
+                  field_oe_text_long:
+                    -
+                      value: "<p>Nulla ipsum diam, viverra quis molestie sit amet, cursus at enim. Nullam tempor leo placerat tellus faucibus congue. Suspendisse consequat lectus sit amet posuere tincidunt. Integer vehicula eleifend ligula ut tincidunt. Suspendisse condimentum, leo a tristique aliquet, erat tellus vehicula lectus, a hendrerit lacus lorem sit amet lacus. Aliquam tristique, libero id vestibulum elementum, sapien sapien imperdiet nibh, facilisis aliquam nulla quam a elit. Morbi pulvinar ex nec nisl varius, a laoreet neque varius. Duis eros massa, dapibus in eleifend eu, volutpat in nibh.</p>\r\n"
+                      format: rich_text
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: e00fff01-3ce1-4be7-a8f7-69a451bb845a
+                  bundle: oe_accordion_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1637659778
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_icon:
+                    -
+                      value: arrow-down
+                  field_oe_text:
+                    -
+                      value: 'Fusce sit amet cursus odio, molestie luctus lorem'
+                  field_oe_text_long:
+                    -
+                      value: "<p>Quisque dignissim quam eget tincidunt euismod. Quisque euismod nulla vel tellus dignissim, ac pellentesque mi varius. Nam eget nisl vitae leo condimentum semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed pulvinar ornare arcu non ultricies. In ex sapien, tincidunt a eleifend quis, accumsan nec metus. Vivamus eget erat eget magna semper ullamcorper. Vestibulum posuere elit tortor, nec suscipit orci tristique eu.</p>\r\n"
+                      format: rich_text
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 145cf387-d762-4653-99b6-6a9778fa9f5c
+          bundle: oe_timeline
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1642180783
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_timeline:
+            -
+              label: 'Nunc vestibulum lorem'
+              title: 'Morbi a eros sit amet'
+              body: 'Aenean et enim vulputate, porttitor tortor quis, mollis odio.'
+              format: plain_text
+            -
+              label: 'Etiam non eros'
+              title: 'Nam quam metus'
+              body: 'Nulla at finibus nisi, nec consectetur ex.'
+              format: plain_text
+            -
+              label: 'Ut scelerisque arcu tellus'
+              title: 'Sed accumsan lacus lacus'
+              body: 'Nam et urna vulputate eros sagittis consequat a ut lorem.'
+              format: plain_text
+            -
+              label: 'Sed condimentum vel purus eu fermentum'
+              title: 'Dignissim vulputate libero ut suscipit'
+              body: 'Vivamus finibus erat a erat mattis facilisis.'
+              format: plain_text
+          field_oe_timeline_expand:
+            -
+              value: 3
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 54585907-2af0-4d16-b83f-385b4036d6e8
+          bundle: oe_facts_figures
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1647944528
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_link:
+            -
+              uri: 'route:<nolink>'
+              title: 'Read more'
+              options: {  }
+          field_oe_paragraphs:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: a1075f34-263a-4e09-8104-c8876481e979
+                  bundle: oe_fact
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1647944528
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_icon:
+                    -
+                      value: download
+                  field_oe_plain_text_long:
+                    -
+                      value: 'Nunc condimentum sapien ut nibh finibus suscipit vitae at justo. Morbi quis odio faucibus, commodo tortor id, elementum libero.'
+                  field_oe_subtitle:
+                    -
+                      value: 'Jira Tickets'
+                  field_oe_title:
+                    -
+                      value: '1529 JIRA Ticket'
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 8b5e78f4-f85a-4cef-a94d-018c3437c625
+                  bundle: oe_fact
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1647944751
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_icon:
+                    -
+                      value: search
+                  field_oe_plain_text_long:
+                    -
+                      value: 'Turpis varius congue venenatis, erat dui feugiat felis.'
+                  field_oe_subtitle:
+                    -
+                      value: 'Feature tickets'
+                  field_oe_title:
+                    -
+                      value: '337 Features'
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: a7ec6e5d-5a41-4320-9e08-2c717186c822
+                  bundle: oe_fact
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1647944788
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_icon:
+                    -
+                      value: facebook
+                  field_oe_plain_text_long:
+                    -
+                      value: 'Cras vestibulum efficitur mi, quis porta tellus rutrum ut. Quisque at pulvinar sem.'
+                  field_oe_subtitle:
+                    -
+                      value: 'Test tickets'
+                  field_oe_title:
+                    -
+                      value: '107 Tests'
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 271e0d1e-b531-465a-b454-15ac602d699f
+                  bundle: oe_fact
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1647944826
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_icon:
+                    -
+                      value: linkedin
+                  field_oe_plain_text_long:
+                    -
+                      value: 'Aliquam lacinia diam eu sem malesuada, in interdum ante bibendum.'
+                  field_oe_subtitle:
+                    -
+                      value: 'Test variants'
+                  field_oe_title:
+                    -
+                      value: '5670 Variants'
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 350de078-cd54-4857-9114-c83c1ab971d7
+                  bundle: oe_fact
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1647944855
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_icon:
+                    -
+                      value: twitter
+                  field_oe_plain_text_long:
+                    -
+                      value: 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis nec lectus tortor.'
+                  field_oe_subtitle:
+                    -
+                      value: 'Jira ticket'
+                  field_oe_title:
+                    -
+                      value: '345 Dev Ticket'
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: c26ace8b-a79b-496f-8e6e-66127750a12d
+                  bundle: oe_fact
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1647944931
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_oe_icon:
+                    -
+                      value: camera
+                  field_oe_plain_text_long:
+                    -
+                      value: 'Sed efficitur bibendum rutrum. Nunc feugiat congue augue ac consectetur.'
+                  field_oe_subtitle:
+                    -
+                      value: 'Figma components'
+                  field_oe_title:
+                    -
+                      value: '43 Components'
+          field_oe_title:
+            -
+              value: 'Fact and figures'
+          oe_w_n_columns:
+            -
+              value: 3
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 5633664f-2c3d-421c-89d1-147e1becb398
+          bundle: oe_description_list
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1648457626
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_oe_description_list_items:
+            -
+              term: Name
+              description: 'Rowan Leuthar'
+              format: plain_text
+            -
+              term: E-mail
+              description: test@domain.tld
+              format: plain_text
+            -
+              term: 'Phone number'
+              description: '+34 999 888 777'
+              format: plain_text
+            -
+              term: City
+              description: Brussels
+              format: plain_text
+            -
+              term: Message
+              description: 'Sed in libero ut nibh placerat accumsan. Vivamus quis mi. Sed lectus. Nullam tincidunt adipiscing enim. Nam eget dui.'
+              format: plain_text
+          field_oe_title:
+            -
+              value: 'Description List example'
+          oe_w_orientation:
+            -
+              value: horizontal

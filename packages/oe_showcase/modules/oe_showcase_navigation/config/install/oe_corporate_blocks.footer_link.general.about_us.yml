@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: about_us
+label: 'About us'
+url: /pages/about-us
+section: about_us
+weight: 0

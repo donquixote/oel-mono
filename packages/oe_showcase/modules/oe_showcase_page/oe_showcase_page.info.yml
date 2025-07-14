@@ -1,0 +1,46 @@
+name: OpenEuropa Showcase Page
+type: module
+description: Provides a demo page content type.
+core_version_requirement: ^10
+package: OpenEuropa Showcase
+dependencies:
+  - drupal:ckeditor
+  - drupal:editor
+  - drupal:json_field
+  - drupal:menu_ui
+  - drupal:pathauto
+  - drupal:composite_reference
+  - oe_paragraphs:oe_paragraphs_banner
+  - oe_paragraphs:oe_paragraphs_carousel
+  - oe_paragraphs:oe_paragraphs_chart
+  - oe_paragraphs:oe_paragraphs_description_list
+  - oe_paragraphs:oe_paragraphs_document
+  - oe_paragraphs:oe_paragraphs_gallery
+  - oe_paragraphs:oe_paragraphs_map
+  - oe_paragraphs:oe_paragraphs_media
+  - oe_paragraphs:oe_paragraphs_social_feed
+  - oe_paragraphs:oe_paragraphs_timeline
+  - openeuropa:oe_webtools
+  - openeuropa:oe_whitelabel_paragraphs
+
+config_devel:
+  install:
+    - core.entity_form_display.node.oe_showcase_page.default
+    - core.entity_view_display.node.oe_showcase_page.default
+    - core.entity_view_display.node.oe_showcase_page.teaser
+    - field.field.node.oe_showcase_page.field_body
+    - field.field.node.oe_showcase_page.field_description
+    - field.storage.node.field_body
+    - field.storage.node.field_description
+    - node.type.oe_showcase_page
+    - pathauto.pattern.page_url_alias_pattern
+  optional:
+    - language.content_settings.node.oe_showcase_page
+
+# List of config overrides. Config_devel doesn't export these entries automatically.
+# Copy them temporarily in the above list if you need to update them.
+# - core.entity_form_display.paragraph.oe_gallery.default
+# - field.field.paragraph.oe_carousel_item.field_oe_title
+# - field.field.paragraph.oe_content_row.field_oe_paragraphs
+# - field.field.paragraph.oe_gallery.field_oe_title
+# - field.storage.paragraph.field_oe_gallery_items

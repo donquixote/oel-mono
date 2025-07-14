@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - filter.format.rich_text
+    - node.type.oe_project
+  module:
+    - text
+id: node.oe_project.body
+field_name: body
+entity_type: node
+bundle: oe_project
+label: 'Body text'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - rich_text
+field_type: text_with_summary
