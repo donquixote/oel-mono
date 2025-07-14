@@ -1,0 +1,52 @@
+{
+    "name": "openeuropa/oel-mono-each",
+    "description": "Metapackage to install a package with symlink to other packages",
+    "type": "project",
+    "license": "EUPL-1.2",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../packages/*",
+            "options": {
+                "versions": {
+                    "openeuropa/oe_whitelabel": "1.999.0",
+                    "openeuropa/oe_bootstrap_theme": "1.999.0"
+                }
+            }
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "wikimedia/composer-merge-plugin": "^2.0.1"
+    },
+    "extra": {
+        "merge-plugin": {
+            "require": [
+                "composer.json"
+            ],
+            "recurse": false,
+            "merge-dev": true,
+            "merge-extra": true,
+            "merge-scripts": true
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "drupal/core-composer-scaffold": true,
+            "openeuropa/composer-artifacts": true,
+            "php-http/discovery": true,
+            "phpro/grumphp": true,
+            "phpro/grumphp-shim": true,
+            "phpstan/extension-installer": true,
+            "sort-packages": true,
+            "tbachert/spi": true,
+            "wikimedia/composer-merge-plugin": true
+        }
+    }
+}

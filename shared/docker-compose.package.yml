@@ -1,0 +1,7 @@
+services:
+  web:
+    volumes:
+      - ../../packages:/var/packages
+      - ../../shared/composer.mono.json:/var/www/html/composer.mono.json
+    environment:
+      COMPOSER: composer.mono.json
