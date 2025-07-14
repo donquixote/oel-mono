@@ -12,10 +12,10 @@ dependencies:
     - media.type.av_portal_video
     - media.type.document
     - media.type.image
+    - media.type.oe_media_pwbi
     - media.type.remote_video
     - media.type.webtools_chart
     - media.type.webtools_map
-    - media.type.webtools_social_feed
     - node.type.oe_list_page
     - node.type.oe_project
     - node.type.oe_sc_event
@@ -28,6 +28,7 @@ dependencies:
     - taxonomy.vocabulary.news_type
     - taxonomy.vocabulary.publication_type
   module:
+    - content_translation
     - entity_browser
     - file
     - filter
@@ -36,12 +37,14 @@ dependencies:
     - oe_content_entity_organisation
     - system
     - taxonomy
+    - tmgmt
     - toolbar
 id: editor
 label: Editor
 weight: 2
 is_admin: null
 permissions:
+  - 'accept translation jobs'
   - 'access administration pages'
   - 'access content overview'
   - 'access documents entity browser pages'
@@ -56,6 +59,7 @@ permissions:
   - 'create document media'
   - 'create image media'
   - 'create oe_list_page content'
+  - 'create oe_media_pwbi media'
   - 'create oe_organisation oe_cx_project_stakeholder corporate entity'
   - 'create oe_organisation oe_stakeholder corporate entity'
   - 'create oe_project content'
@@ -69,14 +73,15 @@ permissions:
   - 'create terms in glossary'
   - 'create terms in news_type'
   - 'create terms in publication_type'
+  - 'create translation jobs'
   - 'create webtools_chart media'
   - 'create webtools_map media'
-  - 'create webtools_social_feed media'
   - 'delete any av_portal_photo media'
   - 'delete any av_portal_video media'
   - 'delete any document media'
   - 'delete any image media'
   - 'delete any oe_list_page content'
+  - 'delete any oe_media_pwbi media'
   - 'delete any oe_project content'
   - 'delete any oe_sc_event content'
   - 'delete any oe_sc_news content'
@@ -86,7 +91,6 @@ permissions:
   - 'delete any remote_video media'
   - 'delete any webtools_chart media'
   - 'delete any webtools_map media'
-  - 'delete any webtools_social_feed media'
   - 'delete oe_list_page revisions'
   - 'delete oe_organisation oe_cx_project_stakeholder corporate entity'
   - 'delete oe_organisation oe_stakeholder corporate entity'
@@ -101,11 +105,13 @@ permissions:
   - 'delete terms in glossary'
   - 'delete terms in news_type'
   - 'delete terms in publication_type'
+  - 'delete translation jobs'
   - 'edit any av_portal_photo media'
   - 'edit any av_portal_video media'
   - 'edit any document media'
   - 'edit any image media'
   - 'edit any oe_list_page content'
+  - 'edit any oe_media_pwbi media'
   - 'edit any oe_project content'
   - 'edit any oe_sc_event content'
   - 'edit any oe_sc_news content'
@@ -115,7 +121,6 @@ permissions:
   - 'edit any remote_video media'
   - 'edit any webtools_chart media'
   - 'edit any webtools_map media'
-  - 'edit any webtools_social_feed media'
   - 'edit oe_organisation oe_cx_project_stakeholder corporate entity'
   - 'edit oe_organisation oe_stakeholder corporate entity'
   - 'edit terms in event_type'
@@ -129,6 +134,9 @@ permissions:
   - 'revert oe_sc_person revisions'
   - 'revert oe_sc_publication revisions'
   - 'revert oe_showcase_page revisions'
+  - 'submit translation jobs'
+  - 'translate any entity'
+  - 'translate editable entities'
   - 'use text format rich_text'
   - 'use text format simple_rich_text'
   - 'view oe_list_page revisions'

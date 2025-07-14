@@ -214,6 +214,7 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
+          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -444,7 +445,6 @@ display:
               anonymous: '0'
               editor: '0'
               configure_page_feedback_form: '0'
-              manage_users: '0'
               manage_contact_forms: '0'
               administrator: '0'
               manage_menu_items: '0'
@@ -511,7 +511,6 @@ display:
               anonymous: '0'
               editor: '0'
               configure_page_feedback_form: '0'
-              manage_users: '0'
               manage_contact_forms: '0'
               administrator: '0'
               manage_menu_items: '0'
@@ -614,7 +613,6 @@ display:
               view_drafts: '0'
               delete_content: '0'
               manage_menu_items: '0'
-              manage_users: '0'
               configure_analytics: '0'
               manage_blocks: '0'
               manage_horizontal_menu: '0'
@@ -700,7 +698,6 @@ display:
               anonymous: '0'
               editor: '0'
               configure_page_feedback_form: '0'
-              manage_users: '0'
               manage_contact_forms: '0'
               administrator: '0'
               manage_menu_items: '0'
@@ -816,7 +813,6 @@ display:
               view_drafts: '0'
               delete_content: '0'
               manage_menu_items: '0'
-              manage_users: '0'
               configure_analytics: '0'
               manage_blocks: '0'
               manage_horizontal_menu: '0'
@@ -903,7 +899,6 @@ display:
               anonymous: '0'
               editor: '0'
               configure_page_feedback_form: '0'
-              manage_users: '0'
               manage_contact_forms: '0'
               administrator: '0'
               manage_menu_items: '0'
@@ -967,7 +962,6 @@ display:
               anonymous: '0'
               editor: '0'
               configure_page_feedback_form: '0'
-              manage_users: '0'
               manage_contact_forms: '0'
               administrator: '0'
               manage_menu_items: '0'
@@ -1070,7 +1064,6 @@ display:
               view_drafts: '0'
               delete_content: '0'
               manage_menu_items: '0'
-              manage_users: '0'
               configure_analytics: '0'
               manage_blocks: '0'
               manage_horizontal_menu: '0'
@@ -1159,7 +1152,6 @@ display:
               anonymous: '0'
               editor: '0'
               configure_page_feedback_form: '0'
-              manage_users: '0'
               manage_contact_forms: '0'
               administrator: '0'
               manage_menu_items: '0'
@@ -1225,7 +1217,6 @@ display:
               anonymous: '0'
               editor: '0'
               configure_page_feedback_form: '0'
-              manage_users: '0'
               manage_contact_forms: '0'
               administrator: '0'
               manage_menu_items: '0'
@@ -1328,7 +1319,6 @@ display:
               view_drafts: '0'
               delete_content: '0'
               manage_menu_items: '0'
-              manage_users: '0'
               configure_analytics: '0'
               manage_blocks: '0'
               manage_horizontal_menu: '0'

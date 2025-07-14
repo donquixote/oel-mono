@@ -73,9 +73,10 @@ class PageTest extends ShowcaseExistingSiteTestBase {
         'Add Links block',
         'Add Listing item block',
         'Add Map',
+        'Add Power BI',
         'Add Quote',
         'Add Rich text',
-        'Add Social feed',
+        'Add Social feed - Deprecated',
         'Add Social media follow',
         'Add Text with Featured media',
         'Add Timeline',
@@ -90,7 +91,6 @@ class PageTest extends ShowcaseExistingSiteTestBase {
       'Rich Text paragraph title'
     );
     $field = $page->findField('field_body[0][subform][field_oe_text_long][0][value]');
-    $this->assertEquals('rich_text', $this->getWysiwigTextFormat($field));
     $field->setValue('Rich Text paragraph Body');
 
     // Add a Banner paragraph.
@@ -152,7 +152,6 @@ class PageTest extends ShowcaseExistingSiteTestBase {
       'Home Page'
     );
     $field = $page->findField('field_body[3][subform][field_oe_paragraphs][0][subform][field_oe_text_long][0][value]');
-    $this->assertEquals('simple_rich_text', $this->getWysiwigTextFormat($field));
     $field->setValue('Listing item description');
 
     $page->pressButton('Add Listing item');
@@ -165,7 +164,6 @@ class PageTest extends ShowcaseExistingSiteTestBase {
       'Example 1 Page'
     );
     $field = $page->findField('field_body[3][subform][field_oe_paragraphs][1][subform][field_oe_text_long][0][value]');
-    $this->assertEquals('simple_rich_text', $this->getWysiwigTextFormat($field));
     $field->setValue('Listing item description for example 1');
 
     $this->selectColorScheme(paragraph_index: 3, color_scheme: 'scheme-green');
@@ -200,7 +198,6 @@ class PageTest extends ShowcaseExistingSiteTestBase {
       'Example title rich text 1'
     );
     $field = $page->findField('field_body[4][subform][field_oe_paragraphs][0][subform][field_oe_text_long][0][value]');
-    $this->assertEquals('rich_text', $this->getWysiwigTextFormat($field));
     $field->setValue('Text description for rich text 1');
 
     // Add Facts and figures paragraph.
@@ -291,7 +288,6 @@ class PageTest extends ShowcaseExistingSiteTestBase {
     $this->selectColorScheme(paragraph_index: 6, color_scheme: 'scheme-green');
 
     $field = $page->findField('field_body[6][subform][field_oe_description_list_items][0][description][value]');
-    $this->assertEquals('simple_rich_text', $this->getWysiwigTextFormat($field));
     $field->setValue('First term description');
 
     $page->pressButton('field_body_6_subform_field_oe_description_list_items_add_more');
@@ -300,7 +296,6 @@ class PageTest extends ShowcaseExistingSiteTestBase {
       'Second term'
     );
     $field = $page->findField('field_body[6][subform][field_oe_description_list_items][1][description][value]');
-    $this->assertEquals('simple_rich_text', $this->getWysiwigTextFormat($field));
     $field->setValue('Second term description');
 
     // Create a media to be referenced.
@@ -403,7 +398,6 @@ class PageTest extends ShowcaseExistingSiteTestBase {
       'Accordion title'
     );
     $field = $page->findField('field_body[9][subform][field_oe_paragraphs][0][subform][field_oe_text_long][0][value]');
-    $this->assertEquals('rich_text', $this->getWysiwigTextFormat($field));
     $field->setValue('Accordion Body');
 
     $this->selectColorScheme(paragraph_index: 9, color_scheme: 'scheme-green');
@@ -525,7 +519,7 @@ class PageTest extends ShowcaseExistingSiteTestBase {
    * @return array
    *   A list of button values, e.g. "Add Accordion".
    */
-  protected function getParagraphAddMoreButtonList(NodeElement $container = NULL): array {
+  protected function getParagraphAddMoreButtonList(?NodeElement $container = NULL): array {
     $container = $container ?: $this->getSession()->getPage();
     $button_wrapper = $container->findAll('css', '.paragraphs-dropbutton-wrapper');
     $this->assertCount(1, $button_wrapper, 'Multiple or no dropdown wrappers found, but one expected.');

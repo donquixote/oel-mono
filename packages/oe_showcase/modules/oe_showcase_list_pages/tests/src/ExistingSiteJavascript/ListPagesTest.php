@@ -463,13 +463,16 @@ class ListPagesTest extends ShowcaseExistingSiteJavascriptTestBase {
 
     // Assert Event title filters only by title.
     $title_input->setValue('This is an Event content number 10');
+    $this->scrollIntoView('#edit-submit');
     $search_button->click();
     $this->assertResultsCount(0);
     $title_input->setValue('This is an Event introduction number 10');
+    $this->scrollIntoView('#edit-submit');
     $search_button->click();
     $this->assertResultsCount(0);
 
     // Filter results by location.
+    $this->scrollIntoView('#edit-submit');
     $filter_form->pressButton('Clear filters');
     $location = $filter_form->findField('Location');
     $this->selectSlimOption($location, 'France');
@@ -538,7 +541,7 @@ class ListPagesTest extends ShowcaseExistingSiteJavascriptTestBase {
       'oe_summary' => 'This is a closed Project',
       'language' => 'en',
       'status' => NodeInterface::PUBLISHED,
-      'oe_project_budget' => 100,
+      'oe_project_eu_budget' => 100,
       'oe_project_dates' => [
         'value' => '2020-05-10',
         'end_value' => '2020-05-15',
@@ -552,7 +555,7 @@ class ListPagesTest extends ShowcaseExistingSiteJavascriptTestBase {
       'oe_summary' => 'This is a ongoing Project',
       'language' => 'en',
       'status' => NodeInterface::PUBLISHED,
-      'oe_project_budget' => 33,
+      'oe_project_eu_budget' => 33,
       'oe_project_dates' => [
         'value' => '2022-05-20',
         'end_value' => $date_plus_1,
@@ -566,7 +569,7 @@ class ListPagesTest extends ShowcaseExistingSiteJavascriptTestBase {
       'oe_summary' => 'This is a pending Project',
       'language' => 'en',
       'status' => NodeInterface::PUBLISHED,
-      'oe_project_budget' => 1234,
+      'oe_project_eu_budget' => 1234,
       'oe_project_dates' => [
         'value' => $date_plus_1,
         'end_value' => $date_plus_10,
@@ -913,7 +916,7 @@ class ListPagesTest extends ShowcaseExistingSiteJavascriptTestBase {
    *   Expected number of results to be reported.
    */
   protected function assertResultsCount(int $expected_count): void {
-    $title = $this->assertSession()->elementExists('css', '.col-xl-8 h4.mb-0');
+    $title = $this->assertSession()->elementExists('css', '.col-xl-8 h2.mb-0');
     $this->assertSame(
       sprintf('Results (%s)', $expected_count),
       $title->getText());
@@ -1010,7 +1013,6 @@ class ListPagesTest extends ShowcaseExistingSiteJavascriptTestBase {
       $this->addEntityBrowserMedia("$bundle List page Image test");
     }
     $summary_field = $page->findField('Summary');
-    $this->assertEquals('simple_rich_text', $this->getWysiwigTextFormat($summary_field));
     $this->enterTextInWysiwyg('Summary', $summary);
     $page->selectFieldOption('Source entity type', 'node');
     $page->selectFieldOption('Source bundle', $bundle);

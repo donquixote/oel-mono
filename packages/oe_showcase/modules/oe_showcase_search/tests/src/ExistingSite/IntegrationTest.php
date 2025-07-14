@@ -124,7 +124,7 @@ class IntegrationTest extends ShowcaseExistingSiteTestBase {
     $this->assertSearchResultsTitle(1);
     $this->assertActiveFilterBadges([
       'Category 2',
-      'After Sun, 08/01/2021 - 00:00',
+      'After Sun, 1 Aug 2021 - 00:00',
     ]);
     $this->assertSearchResults(['Imputo Neo Sagaciter']);
     $this->assertNoPager();
@@ -294,7 +294,7 @@ class IntegrationTest extends ShowcaseExistingSiteTestBase {
    *   Expected number of results to be reported in the title.
    */
   protected function assertSearchResultsTitle(int $expected_count): void {
-    $title = $this->getSearchTopRegion()->find('css', 'h4');
+    $title = $this->getSearchTopRegion()->find('css', 'h2');
     $this->assertSame(
       sprintf('Search results (%s)', $expected_count),
       $title->getText());

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 use Drupal\block\Entity\Block;
 use Drupal\Core\Config\FileStorage;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\facets\Entity\Facet;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
@@ -1015,4 +1016,292 @@ function oe_showcase_post_update_00043(): void {
     '/config/post_updates/00043_social_share',
     'block.block.oe_showcase_theme_social_share'
   );
+}
+
+/**
+ * Normalize page front.
+ */
+function oe_showcase_post_update_00044(): void {
+  $front_path = \Drupal::service('path_alias.manager')->getPathByAlias('/home');
+  $config = \Drupal::configFactory()->getEditable('system.site');
+  $config->set('page.front', $front_path);
+  $config->save();
+}
+
+/**
+ * Update Slim select to version 2.
+ */
+function oe_showcase_post_update_00045(): void {
+  $storage = new FileStorage(\Drupal::service('extension.list.profile')->getPath('oe_showcase') . '/config/post_updates/00045_slim_select');
+  $data = $storage->read('slim_select.settings');
+
+  $config_factory = \Drupal::configFactory();
+  $config_factory->getEditable('slim_select.settings')->setData($data)->save();
+}
+
+/**
+ * Install pwbi contrib module, and update editor role.
+ */
+function oe_showcase_post_update_00046(&$sandbox): void {
+  \Drupal::service('module_installer')->install(['oe_showcase_pwbi']);
+
+  // Allow editor role to manage list pages.
+  $permissions = [
+    'create oe_media_pwbi media',
+    'delete any oe_media_pwbi media',
+    'edit any oe_media_pwbi media',
+  ];
+  $role = Role::load('editor');
+  if ($role === NULL) {
+    throw new \Exception("Role not found: 'editor'.");
+  }
+  foreach ($permissions as $permission) {
+    $role->grantPermission($permission);
+  }
+  $role->save();
+}
+
+/**
+ * Delete the "Manage users" role and uninstall the "RoleAssign" module.
+ */
+function oe_showcase_post_update_00047(): TranslatableMarkup {
+  $role = Role::load('manage_users');
+  $role?->delete();
+
+  $module_name = 'roleassign';
+
+  // Only proceed if the module is enabled.
+  if (!\Drupal::moduleHandler()->moduleExists($module_name)) {
+    return t('Deleted role "manage_users".');
+  }
+
+  $view_id = 'user_admin_people';
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $config_factory */
+  $config_factory = \Drupal::configFactory();
+
+  // Backup the view config.
+  $config_name = "views.view.$view_id";
+  $view_config_data = $config_factory->getEditable($config_name)->getRawData();
+
+  if (empty($view_config_data)) {
+    return t('Deleted role "manage_users".');
+  }
+
+  // Manually delete the view to prevent automatic deletion during module
+  // uninstall.
+  $view_entity = \Drupal::entityTypeManager()->getStorage('view')->load($view_id);
+  if ($view_entity) {
+    $view_entity->delete();
+  }
+
+  // Uninstall roleassign (which would normally delete the view caused by the
+  // added roleassign module dependency (nothing else) to the view by
+  // roleassign_views_data_alter()).
+  \Drupal::service('module_installer')->uninstall(['roleassign']);
+
+  // Restore the view config.
+  $view_restored = \Drupal::entityTypeManager()
+    ->getStorage('view')
+    ->create($view_config_data);
+  $view_restored->save();
+
+  return t('Deleted role "manage_users" and uninstalled @module.', [
+    '@module' => $module_name,
+  ]);
+}
+
+/**
+ * Install OE Agenda.
+ */
+function oe_showcase_post_update_00048(): void {
+  \Drupal::service('module_installer')->install([
+    'oe_content_sub_entity_person',
+  ]);
+
+  ConfigImporter::importMultiple('profile', 'oe_showcase', '/config/post_updates/00048_agenda', [
+    'oe_content_sub_entity_person.oe_person_type.person',
+  ]);
+
+  \Drupal::service('module_installer')->install([
+    'oe_agenda',
+    'oe_whitelabel_agenda',
+  ]);
+
+  ConfigImporter::importMultiple('profile', 'oe_showcase', '/config/post_updates/00048_agenda', [
+    'field.storage.node.field_oelp_agenda',
+    'field.storage.oe_person.field_oelp_person_name',
+    'core.entity_form_display.node.oe_sc_event.default',
+    'core.entity_form_display.oe_person.person.default',
+    'core.entity_view_display.node.oe_sc_event.default',
+    'core.entity_view_display.node.oe_sc_event.full',
+    'core.entity_view_display.node.oe_sc_event.oe_w_content_banner',
+    'core.entity_view_display.node.oe_sc_event.teaser',
+    'core.entity_view_display.oe_person.person.default',
+    'field.field.node.oe_sc_event.field_oelp_agenda',
+    'field.field.oe_agenda_session.oe_default.oe_session_moderators',
+    'field.field.oe_agenda_session.oe_default.oe_session_speakers',
+    'field.field.oe_person.person.field_oelp_person_name',
+  ]);
+}
+
+/**
+ * Install and configure the tmgmt_ec_etranslation module.
+ */
+function oe_showcase_post_update_00049(): void {
+  \Drupal::service('module_installer')->install(['tmgmt_ec_etranslation', 'tmgmt_content', 'tmgmt_config']);
+
+  $config = \Drupal::configFactory()->getEditable('tmgmt.translator.ec_etranslation');
+  if (!$config) {
+    throw new \Exception("The config 'tmgmt.translator.ec_etranslation' not found.");
+  }
+
+  // Set the disclaimer message.
+  $config->set('settings.show_disclaimer', TRUE);
+  $config->set('settings.disclaimer_wrapper.status_message_type', 'information');
+  $message = '<h3>Disclaimer</h3><p>This is a machine translation provided by
+  the European Commission\'s eTranslation service to help you understand this
+  page. <a href="https://ec.europa.eu/info/use-machine-translation-europa-exclusion-liability_en">Please
+  read the conditions of use.</a></p>';
+  $config->set('settings.disclaimer_wrapper.disclaimer_message.value', $message);
+  $config->set('settings.disclaimer_wrapper.disclaimer_message.format', 'rich_text');
+  $config->save();
+
+  // Place the disclaimer message block.
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  /** @var \Drupal\block\Entity\Block $block */
+  $block = Block::create([
+    'id' => $theme . '_machine_translation_disclaimer',
+    'theme' => $theme,
+    'region' => 'content_top',
+    'plugin' => 'machine_translation_disclaimer_block',
+    'settings' => [
+      'label_display' => FALSE,
+    ],
+    'weight' => 0,
+  ]);
+  $block->save();
+
+  // Set mapping pt-pt -> pt.
+  $config->set('remote_languages_mappings', [
+    'bg' => 'bg',
+    'es' => 'es',
+    'cs' => 'cs',
+    'da' => 'da',
+    'de' => 'de',
+    'et' => 'et',
+    'el' => 'el',
+    'en' => 'en',
+    'fr' => 'fr',
+    'ga' => 'ga',
+    'hr' => 'hr',
+    'it' => 'it',
+    'lv' => 'lv',
+    'lt' => 'lt',
+    'hu' => 'hu',
+    'mt' => 'mt',
+    'nl' => 'nl',
+    'pl' => 'pl',
+    'pt-pt' => 'pt',
+    'ro' => 'ro',
+    'sk' => 'sk',
+    'sl' => 'sl',
+    'fi' => 'fi',
+    'sv' => 'sv',
+  ]);
+  $config->save();
+
+  // Allow editor role to manage translation jobs.
+  $permissions = [
+    'translate editable entities',
+    'translate any entity',
+    'create translation jobs',
+    'delete translation jobs',
+    'submit translation jobs',
+    'accept translation jobs',
+  ];
+  $role = Role::load('editor');
+  if ($role === NULL) {
+    throw new \Exception("Role not found: 'editor'.");
+  }
+  foreach ($permissions as $permission) {
+    $role->grantPermission($permission);
+  }
+  $role->save();
+}
+
+/**
+ * Replace Seven with Claro.
+ */
+function oe_showcase_post_update_00050(): void {
+  \Drupal::service('theme_installer')->install(['claro']);
+  \Drupal::configFactory()->getEditable('system.theme')
+    ->set('admin', 'claro')
+    ->save();
+  \Drupal::service('theme_installer')->uninstall(['seven']);
+}
+
+/**
+ * Enable Ckeditor5.
+ */
+function oe_showcase_post_update_00051(): void {
+  \Drupal::service('module_installer')->install(['ckeditor5']);
+
+  ConfigImporter::importMultiple('profile', 'oe_showcase', '/config/post_updates/00050_ckeditor5', [
+    'filter.format.full_html',
+    'filter.format.rich_text',
+    'filter.format.simple_rich_text',
+    'editor.editor.full_html',
+    'editor.editor.rich_text',
+    'editor.editor.simple_rich_text',
+  ]);
+
+  // Disable CKEditor 4, now that none of the editors depend on it anymore.
+  \Drupal::service('module_installer')->uninstall(['ckeditor']);
+}
+
+/**
+ * Delete deprecated webtools_social_feed media type.
+ */
+function oe_showcase_post_update_00052(array &$sandbox) {
+  // Delete all media entities of bundle 'webtools_social_feed'.
+  $media_storage = \Drupal::entityTypeManager()->getStorage('media');
+  $medias = $media_storage->loadByProperties([
+    'bundle' => 'webtools_social_feed',
+  ]);
+  if (!empty($medias)) {
+    $media_storage->delete($medias);
+    \Drupal::logger('oe_showcase')->notice('Deleted @count webtools_social_feed media items.', [
+      '@count' => count($medias),
+    ]);
+  }
+
+  // Remove the media bundle configuration.
+  $config_name = 'media.type.webtools_social_feed';
+  $config = \Drupal::configFactory()->getEditable($config_name);
+  if (!$config->isNew()) {
+    $config->delete();
+    \Drupal::logger('oe_showcase')->notice('Removed media bundle configuration @bundle.', [
+      '@bundle' => 'webtools_social_feed',
+    ]);
+  }
+}
+
+/**
+ * Uninstall remote_stream_wrapper.
+ */
+function oe_showcase_post_update_00053(): void {
+  \Drupal::service('module_installer')->uninstall(['remote_stream_wrapper']);
+}
+
+/**
+ * Apply the new date format changes introduced in Drupal 11.
+ */
+function oe_showcase_post_update_00054(): void {
+  ConfigImporter::importMultiple('profile', 'oe_showcase', '/config/post_updates/00051_date_format', [
+    'core.date_format.fallback',
+    'core.date_format.long',
+    'core.date_format.medium',
+    'core.date_format.short',
+  ]);
 }

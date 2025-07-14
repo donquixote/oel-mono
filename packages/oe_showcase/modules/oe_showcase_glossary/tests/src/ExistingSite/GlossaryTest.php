@@ -182,7 +182,7 @@ class GlossaryTest extends ShowcaseExistingSiteTestBase {
     $summary->find('named_exact', ['link', mb_strtoupper((string) $candidate)])->click();
     $sort_by->selectOption('Z-A');
     $exposed_form->pressButton('Apply');
-    $this->assertViewResults(array_reverse($all_terms[$candidate]), $candidate, 'za');
+    $this->assertViewResults(array_reverse($all_terms[$candidate]), $candidate);
 
     // Create a new term with a very old update date.
     $glossary_vocabulary = Vocabulary::load('glossary');
@@ -195,10 +195,10 @@ class GlossaryTest extends ShowcaseExistingSiteTestBase {
     // Test the two date-based sorts.
     $sort_by->selectOption('Latest update');
     $exposed_form->pressButton('Apply');
-    $this->assertViewResults(array_merge($all_terms[$candidate], [$old_term]), $candidate, 'changed');
+    $this->assertViewResults(array_merge($all_terms[$candidate], [$old_term]), $candidate);
     $sort_by->selectOption('Oldest update');
     $exposed_form->pressButton('Apply');
-    $this->assertViewResults(array_merge([$old_term], $all_terms[$candidate]), $candidate, 'oldest');
+    $this->assertViewResults(array_merge([$old_term], $all_terms[$candidate]), $candidate);
   }
 
   /**
@@ -437,7 +437,10 @@ class GlossaryTest extends ShowcaseExistingSiteTestBase {
     // last.
     ksort($terms_by_letter);
     ksort($terms_by_number);
-
+    // PHP and mysql sort the æ character differently.
+    $special_char["æ"] = $terms_by_letter["æ"];
+    unset($terms_by_letter["æ"]);
+    $terms_by_letter = array_slice($terms_by_letter, 0, 1) + $special_char + $terms_by_letter;
     return $terms_by_letter + $terms_by_number;
   }
 

@@ -33,6 +33,11 @@ trait MediaCreationTrait {
     $bundles = \Drupal::entityTypeManager()->getStorage('media_type')->loadMultiple();
     $media = [];
     foreach (array_keys($bundles) as $bundle) {
+      if ($bundle === 'webtools_social_feed') {
+        // Deprecated media bundle, already removed in oe_webtools 1.36.0 and
+        // will be removed in oe_media 2.0.
+        continue;
+      }
       $media[$bundle] = $this->createMediaByBundle($bundle);
     }
 
@@ -72,24 +77,6 @@ trait MediaCreationTrait {
     return $this->createMedia($values + [
       'name' => 'Webtools map title',
       'oe_media_webtools' => '{"service":"map"}',
-    ]);
-  }
-
-  /**
-   * Create a Webtools social feed media with default values.
-   *
-   * @param array $values
-   *   (optional) An array of values to set, keyed by property name.
-   *
-   * @return \Drupal\media\MediaInterface
-   *   The media entity.
-   */
-  protected function createWebtoolsSocialFeedMedia(array $values = []): MediaInterface {
-    $values['bundle'] = 'webtools_social_feed';
-
-    return $this->createMedia($values + [
-      'name' => 'Webtools social feed title',
-      'oe_media_webtools' => '{"service":"social_feed"}',
     ]);
   }
 
@@ -163,6 +150,35 @@ trait MediaCreationTrait {
   protected function createImageMedia(array $values = []): MediaInterface {
     $media = $this->whitelabelCreateImageMedia($values);
     $this->markEntityForCleanup($media->get('oe_media_image')->first()->entity);
+
+    return $media;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function createOeMediaPwbiMedia(array $values = []): MediaInterface {
+    $values['bundle'] = 'oe_media_pwbi';
+
+    $media = $this->createMedia($values + [
+      'name' => 'My test report',
+      'bundle' => 'power_bi_report',
+      'status' => 1,
+      'field_media_pwbi_embed_visual' => [
+        0 => [
+          'report_id' => 'report_id',
+          'workspace_id' => 'report_id',
+          'report_height' => '100',
+          'report_layout' => '3',
+          'report_width' => '100',
+          'token_type' => 'Embed',
+          'embed_type' => 'report',
+          'report_width_units' => '%',
+          'report_height_units' => 'px',
+          'report_breakpoints_height' => 'a:3:{s:7:"pwbi.sm";a:1:{s:6:"height";s:3:"500";}s:7:"pwbi.md";a:1:{s:6:"height";s:3:"900";}s:7:"pwbi.lg";a:1:{s:6:"height";s:4:"1100";}}',
+        ],
+      ],
+    ]);
 
     return $media;
   }

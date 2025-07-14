@@ -2,7 +2,7 @@ name: OpenEuropa Showcase Theme
 description: The OpenEuropa Showcase Theme.
 type: theme
 base theme: oe_whitelabel
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
 
 libraries:
   - oe_showcase_theme/global-styling
@@ -33,7 +33,7 @@ config_devel:
     - block.block.oe_showcase_theme_branding
     - block.block.oe_showcase_theme_breadcrumbs
     - block.block.oe_showcase_theme_content_banner
-    - block.block.oe_showcase_theme_content_language_switcher
+    - block.block.oe_showcase_theme_etrans_unified
     - block.block.oe_showcase_theme_ec_corporate_footer
     - block.block.oe_showcase_theme_eu_corporate_footer
     - block.block.oe_showcase_theme_eulogin

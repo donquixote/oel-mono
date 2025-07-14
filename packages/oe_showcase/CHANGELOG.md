@@ -1,11 +1,155 @@
 # Change Log
 
+## [1.24.0](https://github.com/openeuropa/oe_showcase/tree/1.24.0) (2025-07-10)
+
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.23.0...1.24.0)
+
+**Merged pull requests:**
+
+- OEL-3910: Added test for multiselect accessibility. [\#326](https://github.com/openeuropa/oe_showcase/pull/326) ([tibi2303](https://github.com/tibi2303))
+- EWPP-4664: Update to Drupal 11.1 [\#319](https://github.com/openeuropa/oe_showcase/pull/319) ([peterserfozo](https://github.com/peterserfozo))
+
+## [1.23.0](https://github.com/openeuropa/oe_showcase/tree/1.23.0) (2025-07-04)
+
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/0.3910.202507071400...1.23.0)
+
+**Merged pull requests:**
+
+- Release 1.23.0 [\#324](https://github.com/openeuropa/oe_showcase/pull/324) ([tibi2303](https://github.com/tibi2303))
+- OEL-3817: \[oe\_whitelabel\] Preserve the query parameters when submitting the SearchForm [\#304](https://github.com/openeuropa/oe_showcase/pull/304) ([enriquelacoma](https://github.com/enriquelacoma))
+
+## [1.22.0](https://github.com/openeuropa/oe_showcase/tree/1.22.0) (2025-07-01)
+
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/0.1.202506301139...1.22.0)
+
+**Merged pull requests:**
+
+- Prepare release 1.22.0. [\#322](https://github.com/openeuropa/oe_showcase/pull/322) ([tibi2303](https://github.com/tibi2303))
+- EWPP-4664: Uninstall the remote\_stream\_wrapper module. [\#320](https://github.com/openeuropa/oe_showcase/pull/320) ([peterserfozo](https://github.com/peterserfozo))
+- EWPP-4664: Prerequisites of Drupal 11.1 [\#318](https://github.com/openeuropa/oe_showcase/pull/318) ([drishu](https://github.com/drishu))
+- OEL-3909: \[oe\_whitelabel\] Error on phpunit tests [\#316](https://github.com/openeuropa/oe_showcase/pull/316) ([enriquelacoma](https://github.com/enriquelacoma))
+- OEL-3911: Update oe\_webtools, oe\_media and oe\_paragraphs [\#314](https://github.com/openeuropa/oe_showcase/pull/314) ([piotrsmykaj](https://github.com/piotrsmykaj))
+- OEL-3872: \[oe\_showcase\] Update MySQL Percona 5.7 -\> 8.0 [\#311](https://github.com/openeuropa/oe_showcase/pull/311) ([enriquelacoma](https://github.com/enriquelacoma))
+
+## [1.21.0](https://github.com/openeuropa/oe_showcase/tree/1.21.0) (2025-06-23)
+
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.20.0...1.21.0)
+
+**Merged pull requests:**
+
+- Prepare release 1.21.0. [\#317](https://github.com/openeuropa/oe_showcase/pull/317) ([tibi2303](https://github.com/tibi2303))
+- OEL-3912: Replace Seven with Claro. [\#315](https://github.com/openeuropa/oe_showcase/pull/315) ([drishu](https://github.com/drishu))
+- OEL-3433: Move to ckeditor 5. [\#312](https://github.com/openeuropa/oe_showcase/pull/312) ([drishu](https://github.com/drishu))
+- OEL-3740: Removed roleassign module. [\#309](https://github.com/openeuropa/oe_showcase/pull/309) ([tibi2303](https://github.com/tibi2303))
+- OEL-3858: Updated images. [\#308](https://github.com/openeuropa/oe_showcase/pull/308) ([tibi2303](https://github.com/tibi2303))
+
+## [1.20.0](https://github.com/openeuropa/oe_showcase/tree/1.20.0) (2025-06-04)
+
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.19.0...1.20.0)
+
+**Merged pull requests:**
+
+- Prepare release 1.20.0. [\#310](https://github.com/openeuropa/oe_showcase/pull/310) ([piotrsmykaj](https://github.com/piotrsmykaj))
+- OEL-3769: Install and configure tmgmt\_ec\_etranslation [\#298](https://github.com/openeuropa/oe_showcase/pull/298) ([piotrsmykaj](https://github.com/piotrsmykaj))
+- OEL-3865: Added remote\_stream\_wrapper module. [\#307](https://github.com/openeuropa/oe_showcase/pull/307) ([tibi2303](https://github.com/tibi2303))
+
+## [1.19.0](https://github.com/openeuropa/oe_showcase/tree/1.19.0) (2025-05-22)
+
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/0.1.202504281240...1.19.0)
+
+**Merged pull requests:**
+
+- Prepare release 1.19.0 [\#303](https://github.com/openeuropa/oe_showcase/pull/303) ([tibi2303](https://github.com/tibi2303))
+- OEL-0000: Update oe\_whitelabel. [\#302](https://github.com/openeuropa/oe_showcase/pull/302) ([tibi2303](https://github.com/tibi2303))
+- OEL-3662: Integrate oe\_agenda [\#295](https://github.com/openeuropa/oe_showcase/pull/295) ([drishu](https://github.com/drishu))
+
+## [0.1.202504281240](https://github.com/openeuropa/oe_showcase/tree/0.1.202504281240) (2025-04-28)
+
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.18.0...0.1.202504281240)
+
+**Merged pull requests:**
+
+- OEL-0000: Update oe\_whitelabel. [\#299](https://github.com/openeuropa/oe_showcase/pull/299) ([tibi2303](https://github.com/tibi2303))
+- OEL-3689: Delete the manage\_users role and uninstall RoleAssign module [\#294](https://github.com/openeuropa/oe_showcase/pull/294) ([piotrsmykaj](https://github.com/piotrsmykaj))
+- OEL-3699: Slim select v2 dropdown menu position issue [\#292](https://github.com/openeuropa/oe_showcase/pull/292) ([piotrsmykaj](https://github.com/piotrsmykaj))
+- OEL-3081: Allow to use Slimselect for single value selects. [\#289](https://github.com/openeuropa/oe_showcase/pull/289) ([piotrsmykaj](https://github.com/piotrsmykaj))
+
+## [1.18.0](https://github.com/openeuropa/oe_showcase/tree/1.18.0) (2025-04-04)
+
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.17.0...1.18.0)
+
+**Merged pull requests:**
+
+- Prepare release 1.18.0 [\#293](https://github.com/openeuropa/oe_showcase/pull/293) ([enriquelacoma](https://github.com/enriquelacoma))
+- OEL-3666: Add pwbi module and configure media type. [\#288](https://github.com/openeuropa/oe_showcase/pull/288) ([enriquelacoma](https://github.com/enriquelacoma))
+
+## [1.17.0](https://github.com/openeuropa/oe_showcase/tree/1.17.0) (2025-03-31)
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.16.0...1.17.0)
+
+**Merged pull requests:**
+
+- OEL-3682: Updated oe\_whitelabel. [\#291](https://github.com/openeuropa/oe_showcase/pull/291) ([tibi2303](https://github.com/tibi2303))
+- Release 1.17.0. [\#290](https://github.com/openeuropa/oe_showcase/pull/290) ([tibi2303](https://github.com/tibi2303))
+- EWPP-4991: Update to php8.3 [\#282](https://github.com/openeuropa/oe_showcase/pull/282) ([drishu](https://github.com/drishu))
+
+## [1.16.0](https://github.com/openeuropa/oe_showcase/tree/1.16.0) (2025-03-20)
+
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.15.0...1.16.0)
+
+**Merged pull requests:**
+
+- Prepare release 1.16.0. [\#287](https://github.com/openeuropa/oe_showcase/pull/287) ([tibi2303](https://github.com/tibi2303))
+- OEL-3682: Update oe\_whitelabel and oe\_bootstrap\_theme. [\#286](https://github.com/openeuropa/oe_showcase/pull/286) ([tibi2303](https://github.com/tibi2303))
+
+## [1.15.0](https://github.com/openeuropa/oe_showcase/tree/1.15.0) (2025-03-06)
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.15.0...1.15.0)
+
+**Merged pull requests:**
+
+- Prepare release 1.15.0. [\#285](https://github.com/openeuropa/oe_showcase/pull/285) ([drishu](https://github.com/drishu))
+- OEL-3354: BC for text always on top in mobile viewports. [\#284](https://github.com/openeuropa/oe_showcase/pull/284) ([drishu](https://github.com/drishu))
+- OEL-3504: Update to slim\_select 2 [\#283](https://github.com/openeuropa/oe_showcase/pull/283) ([piotrsmykaj](https://github.com/piotrsmykaj))
+
+## [1.14.0](https://github.com/openeuropa/oe_showcase/tree/1.14.0) (2024-12-18)
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.13.0...1.14.0)
+
+**Merged pull requests:**
+
+- Prepare release 1.14.0. [\#281](https://github.com/openeuropa/oe_showcase/pull/281) ([drishu](https://github.com/drishu))
+- OEL-3577: Update packages. [\#280](https://github.com/openeuropa/oe_showcase/pull/280) ([drishu](https://github.com/drishu))
+
+## [1.13.0](https://github.com/openeuropa/oe_showcase/tree/1.13.0) (2024-11-06)
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.12.0...1.13.0)
+
+**Merged pull requests:**
+
+- Prepare release 1.13.0 [\#279](https://github.com/openeuropa/oe_showcase/pull/279) ([tibi2303](https://github.com/tibi2303))
+- OEL-3424: Added h1 tags on search and homepage. [\#277](https://github.com/openeuropa/oe_showcase/pull/277) ([tibi2303](https://github.com/tibi2303))
+
+## [1.12.0](https://github.com/openeuropa/oe_showcase/tree/1.12.0) (2024-10-10)
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.11.0...1.12.0)
+
+**Merged pull requests:**
+
+- OEL-3392: Fix subscription tests. [\#276](https://github.com/openeuropa/oe_showcase/pull/276) ([drishu](https://github.com/drishu))
+- Prepare release 1.12.0. [\#275](https://github.com/openeuropa/oe_showcase/pull/275) ([drishu](https://github.com/drishu))
+- OEL-3168: Send subscriptions emails after update hooks run [\#270](https://github.com/openeuropa/oe_showcase/pull/270) ([AaronGilMartinez](https://github.com/AaronGilMartinez))
+
+## [1.11.0](https://github.com/openeuropa/oe_showcase/tree/1.11.0) (2024-09-23)
+[Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.10.0...1.11.0)
+
+**Merged pull requests:**
+
+- Prepare release 1.11.0. [\#274](https://github.com/openeuropa/oe_showcase/pull/274) ([drishu](https://github.com/drishu))
+- OEL-3431: Bump up oe\_bootstrap\_theme and oe\_whitelabel. [\#273](https://github.com/openeuropa/oe_showcase/pull/273) ([drishu](https://github.com/drishu))
+
 ## [1.10.0](https://github.com/openeuropa/oe_showcase/tree/1.10.0) (2024-09-13)
 [Full Changelog](https://github.com/openeuropa/oe_showcase/compare/1.9.0...1.10.0)
 
 **Merged pull requests:**
 
 - OEL-3338: Fix tests after card changes. [\#272](https://github.com/openeuropa/oe_showcase/pull/272) ([drishu](https://github.com/drishu))
+- Prepare release 1.10.0. [\#271](https://github.com/openeuropa/oe_showcase/pull/271) ([drishu](https://github.com/drishu))
 - OEL-2611: Add social share to publications. [\#267](https://github.com/openeuropa/oe_showcase/pull/267) ([drishu](https://github.com/drishu))
 
 ## [1.9.0](https://github.com/openeuropa/oe_showcase/tree/1.9.0) (2024-08-19)

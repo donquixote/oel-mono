@@ -1,7 +1,6 @@
-version: '2'
 services:
   web:
-    image: fpfis/httpd-php-dev:8.1
+    image: registry.fpfis.eu/digit/devsecops/httpd-php:8.3-dev
     working_dir: /var/www/html
     ports:
       - 8080:8080
@@ -18,10 +17,11 @@ services:
       # XDEBUG_SESSION: 1
 
   mysql:
-    image: percona/percona-server:5.7
-    command: --innodb-log-file-size=1G --max_allowed_packet=1G --innodb-buffer-pool-size=512M --wait_timeout=3000 --net_write_timeout=3000 --log_error_verbosity=3
+    image: percona/percona-server:8.0
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - mysql:/var/lib/mysql
     # ports:
     #   - 3306:3306
 
@@ -41,6 +41,8 @@ services:
       - SCREEN_WIDTH=1440
       - SCREEN_HEIGHT=900
       - VNC_NO_PASSWORD=1
+      - NODE_MAX_INSTANCES=5
+      - NODE_MAX_SESSION=5
     ports:
       - '7900:7900'
     shm_size: 2g
@@ -52,6 +54,9 @@ services:
     environment:
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+volumes:
+  mysql:
 
 #### Mac users: uncomment the "volumes" key to enable the NFS file sharing. You can find more information about Docker for Mac here: https://github.com/openeuropa/openeuropa/blob/master/docs/starting/tooling.md#using-docker-on-macos
 
