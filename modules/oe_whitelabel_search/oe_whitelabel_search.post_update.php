@@ -45,3 +45,18 @@ function oe_whitelabel_search_post_update_00002(&$sandbox) {
   }
   return 'No search block needed to be updated.';
 }
+
+/**
+ * Move the Whitelabel Search Block to the 'header_top' region.
+ */
+function oe_whitelabel_search_post_update_00009(&$sandbox) {
+  $block = Block::load('oe_whitelabel_search_form');
+  if (!$block || $block->getTheme() !== 'oe_whitelabel') {
+    return 'No update needed.';
+  }
+  if ($block->getRegion() !== 'header_top') {
+    $block->setRegion('header_top')->save();
+    return "Search block moved to 'header_top'.";
+  }
+  return 'Search block already in correct region.';
+}

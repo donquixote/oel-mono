@@ -13,7 +13,7 @@
 
 {% set title = content['#title']|render %}
 {% set link_title %}
-  <span class="d-block d-lg-inline-block">{{ title }}</span>
+  <span class="d-none d-xl-inline-block">{{ title }}</span>
 {% endset %}
 
 <div class="oe-authentication nav-link">
@@ -23,6 +23,7 @@
     icon: {
       name: 'person-fill',
       size: 'xs',
+      attributes: create_attribute().removeClass('me-2-5')
     },
     icon_position: 'before',
     standalone: true,
