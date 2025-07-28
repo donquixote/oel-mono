@@ -94,25 +94,42 @@ class SearchBlockTest extends KernelTestBase {
     $render = $this->container->get('renderer')->renderRoot($build);
     $crawler = new Crawler($render->__toString());
 
-    // Assert the form rendering.
-    $form = $crawler->filter('form');
+    // Assert wrapper classes.
+    $wrapper = $crawler->filter('div.search-dropdown.dropdown');
+    $this->assertCount(1, $wrapper);
+
+    // Assert toggle button.
+    $toggle = $wrapper->filter('button.oe-whitelabel-search-form');
+    $this->assertCount(1, $toggle);
+    $this->assertSame('block-oe-whitelabel-search-form', $toggle->attr('id'));
+    $this->assertStringContainsString('btn', $toggle->attr('class') ?? '');
+    $this->assertStringContainsString('dropdown-toggle', $toggle->attr('class') ?? '');
+
+    // Assert search icon in toggle button.
+    $icon = $toggle->filter('svg.bi.icon--fluid');
+    $this->assertCount(1, $icon);
+
+    // Assert dropdown menu.
+    $dropdown = $wrapper->filter('div.dropdown-menu');
+    $this->assertCount(1, $dropdown);
+
+    // Assert form.
+    $form = $dropdown->filter('form');
     $this->assertCount(1, $form);
     $this->assertSame('oe-whitelabel-search-form', $form->attr('id'));
-    $this->assertStringContainsString('d-flex', $form->attr('class'));
-    $input = $crawler->filter('input[name="search_input"]');
+
+    // Assert search input.
+    $input = $form->filter('input[name="search_input"]');
     $this->assertCount(1, $input);
-    $classes = 'required form-control rounded-0 rounded-start';
-    $this->assertSame($classes, $input->attr('class'));
+    $this->assertSame('required form-control', $input->attr('class'));
     $this->assertSame('Search', $input->attr('placeholder'));
-    $button = $form->filter('button');
+
+    // Assert submit button.
+    $button = $form->filter('input[type="submit"]');
     $this->assertCount(1, $button);
-    $this->assertStringContainsString('rounded-end', $button->attr('class'));
-    $this->assertStringContainsString('rounded-0', $button->attr('class'));
-    $this->assertStringContainsString('btn', $button->attr('class'));
-    $this->assertStringContainsString('btn-md', $button->attr('class'));
-    $this->assertStringContainsString('btn-light', $button->attr('class'));
-    $icon = $button->filter('.bi.icon--fluid');
-    $this->assertCount(1, $icon);
+    $this->assertStringContainsString('btn', $button->attr('class') ?? '');
+    $this->assertStringContainsString('btn-primary', $button->attr('class') ?? '');
+    $this->assertSame('Search', $button->attr('value'));
   }
 
   /**
