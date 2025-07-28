@@ -82,9 +82,9 @@ class SearchBlockTest extends KernelTestBase {
   }
 
   /**
-   * Tests the rendering of the whitelabel search block navigation_right region.
+   * Tests the rendering of the search block in the header_top region.
    */
-  public function testNavigationRightSearchBlockRendering(): void {
+  public function testHeaderTopSearchBlockRendering(): void {
     $block_entity_storage = $this->container
       ->get('entity_type.manager')
       ->getStorage('block');
@@ -99,13 +99,11 @@ class SearchBlockTest extends KernelTestBase {
     $this->assertCount(1, $form);
     $this->assertSame('oe-whitelabel-search-form', $form->attr('id'));
     $this->assertStringContainsString('d-flex', $form->attr('class'));
-    // Assert search text box.
     $input = $crawler->filter('input[name="search_input"]');
     $this->assertCount(1, $input);
     $classes = 'required form-control rounded-0 rounded-start';
     $this->assertSame($classes, $input->attr('class'));
     $this->assertSame('Search', $input->attr('placeholder'));
-    // Assert the button and icon rendering.
     $button = $form->filter('button');
     $this->assertCount(1, $button);
     $this->assertStringContainsString('rounded-end', $button->attr('class'));

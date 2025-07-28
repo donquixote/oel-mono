@@ -49,7 +49,7 @@ function oe_whitelabel_search_post_update_00002(&$sandbox) {
 /**
  * Move the Whitelabel Search Block to the 'header_top' region.
  */
-function oe_whitelabel_search_post_update_00009(&$sandbox) {
+function oe_whitelabel_search_post_update_00004(&$sandbox) {
   $block = Block::load('oe_whitelabel_search_form');
   if (!$block || $block->getTheme() !== 'oe_whitelabel') {
     return 'No update needed.';
