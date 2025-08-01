@@ -81,6 +81,7 @@ Your test site will be available at [http://localhost:8080/build](http://localho
 Run tests as follows:
 
 ```
+$ docker-compose exec web ./vendor/bin/drush ci:site-setup
 $ docker-compose exec web ./vendor/bin/drush en -y oe_showcase_test
 $ docker-compose exec web ./vendor/bin/drush pmu update
 $ docker-compose exec web ./vendor/bin/phpunit
