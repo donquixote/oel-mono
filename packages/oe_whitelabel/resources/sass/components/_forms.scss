@@ -66,3 +66,41 @@
   }
 }
 
+
+.search-dropdown {
+  display: flex;
+  position: static;
+  .dropdown-menu[data-bs-popper] {
+    left: auto;
+    right: 0;
+  }
+  .dropdown-toggle {
+    &:after {
+      display: none;
+    }
+  }
+}
+.language-switcher,
+.oe-authentication {
+  a {
+    color: var(--bs-body-color);
+  }
+}
+
+@media (max-width: 1200px) {
+  .language-switcher,
+  .oe-authentication {
+    svg {
+      margin: 0 auto !important;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .search-dropdown {
+    .dropdown-menu {
+      position: relative;
+      border: none;
+    }
+  }
+}

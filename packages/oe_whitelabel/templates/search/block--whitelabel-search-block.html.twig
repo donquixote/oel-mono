@@ -9,5 +9,22 @@
  */
 #}
 {% block content %}
-  {{ content }}
+<div class="search-dropdown dropdown">
+  {{ pattern('button', {
+    'variant': 'ghost',
+    'icon': 'search',
+    'attributes': attributes
+      .setAttribute('data-bs-toggle', 'dropdown')
+      .setAttribute('aria-haspopup', 'true')
+      .setAttribute('aria-expanded', 'false')
+      .addClass([
+        'dropdown-toggle',
+        'd-xl-none',
+        'px-2',
+      ])
+  }) }}
+  <div class="dropdown-menu px-3 px-xl-0 d-xl-block">
+    {{ content }}
+  </div>
+</div>
 {% endblock %}

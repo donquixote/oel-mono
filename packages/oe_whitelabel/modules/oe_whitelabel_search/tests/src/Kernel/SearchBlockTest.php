@@ -82,9 +82,9 @@ class SearchBlockTest extends KernelTestBase {
   }
 
   /**
-   * Tests the rendering of the whitelabel search block navigation_right region.
+   * Tests the rendering of the search block in the header_top region.
    */
-  public function testNavigationRightSearchBlockRendering(): void {
+  public function testHeaderTopSearchBlockRendering(): void {
     $block_entity_storage = $this->container
       ->get('entity_type.manager')
       ->getStorage('block');
@@ -94,27 +94,57 @@ class SearchBlockTest extends KernelTestBase {
     $render = $this->container->get('renderer')->renderRoot($build);
     $crawler = new Crawler($render->__toString());
 
-    // Assert the form rendering.
-    $form = $crawler->filter('form');
-    $this->assertCount(1, $form);
-    $this->assertSame('oe-whitelabel-search-form', $form->attr('id'));
-    $this->assertStringContainsString('d-flex', $form->attr('class'));
-    // Assert search text box.
-    $input = $crawler->filter('input[name="search_input"]');
-    $this->assertCount(1, $input);
-    $classes = 'required form-control rounded-0 rounded-start';
-    $this->assertSame($classes, $input->attr('class'));
-    $this->assertSame('Search', $input->attr('placeholder'));
-    // Assert the button and icon rendering.
-    $button = $form->filter('button');
-    $this->assertCount(1, $button);
-    $this->assertStringContainsString('rounded-end', $button->attr('class'));
-    $this->assertStringContainsString('rounded-0', $button->attr('class'));
-    $this->assertStringContainsString('btn', $button->attr('class'));
-    $this->assertStringContainsString('btn-md', $button->attr('class'));
-    $this->assertStringContainsString('btn-light', $button->attr('class'));
-    $icon = $button->filter('.bi.icon--fluid');
+    // Search wrapper div.
+    $wrapper = $crawler->filter('div.search-dropdown.dropdown');
+    $this->assertCount(1, $wrapper);
+
+    // Toggle button.
+    $toggle = $wrapper->filter('button.oe-whitelabel-search-form');
+    $this->assertCount(1, $toggle);
+    $this->assertSame('block-oe-whitelabel-search-form', $toggle->attr('id'));
+    $this->assertStringContainsString('dropdown-toggle', $toggle->attr('class') ?? '');
+    $this->assertStringContainsString('btn', $toggle->attr('class') ?? '');
+    $this->assertStringContainsString('btn-ghost', $toggle->attr('class') ?? '');
+    $this->assertStringContainsString('btn-md', $toggle->attr('class') ?? '');
+
+    // Icon inside toggle.
+    $icon = $toggle->filter('svg.bi.icon--fluid');
     $this->assertCount(1, $icon);
+
+    // Dropdown menu container.
+    $dropdown = $wrapper->filter('div.dropdown-menu');
+    $this->assertCount(1, $dropdown);
+    $this->assertStringContainsString('px-3', $dropdown->attr('class') ?? '');
+    $this->assertStringContainsString('d-xl-block', $dropdown->attr('class') ?? '');
+
+    // The form.
+    $form = $dropdown->filter('form#oe-whitelabel-search-form');
+    $this->assertCount(1, $form);
+    $this->assertSame('d-flex ms-xl-4', $form->attr('class'));
+
+    // Text input field.
+    $input = $form->filter('input[name="search_input"]');
+    $this->assertCount(1, $input);
+    $this->assertSame('required form-control rounded-0 rounded-start', $input->attr('class'));
+    $this->assertSame('Search', $input->attr('placeholder'));
+
+    // Submit button.
+    $button = $form->filter('button#edit-submit');
+    $this->assertCount(1, $button);
+    $this->assertSame('Search', trim($button->text()));
+    $this->assertSame('Search', $button->attr('value'));
+    $this->assertStringContainsString('btn', $button->attr('class') ?? '');
+    $this->assertStringContainsString('btn-light', $button->attr('class') ?? '');
+    $this->assertStringContainsString('rounded-end', $button->attr('class') ?? '');
+
+    // Icon inside submit button.
+    $submit_icon = $button->filter('svg.bi.icon--fluid');
+    $this->assertCount(1, $submit_icon);
+
+    // Hidden form_id input.
+    $form_id_input = $form->filter('input[name="form_id"]');
+    $this->assertCount(1, $form_id_input);
+    $this->assertSame('oe_whitelabel_search_form', $form_id_input->attr('value'));
   }
 
   /**
