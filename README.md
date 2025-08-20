@@ -125,114 +125,31 @@ An installation in the root directory is currently not supported.
 
 Only one package installation can be active at any given time!
 
-### Setup for oe_showcase
+### Requirements
 
-Clean up and stop other packages:
+- [Docker](https://www.docker.com/get-docker)
+- [Docker Compose](https://docs.docker.com/compose/)
 
-```sh
-# Remove vendor and build directories for packages that will be symlinked.
-# You will need sudo because these all belong to the root user, if they exist.
-sudo rm -rf packages/oe_bootstrap_theme/vendor
-sudo rm -rf packages/oe_bootstrap_theme/build
-sudo rm -rf packages/oe_whitelabel/vendor
-sudo rm -rf packages/oe_whitelabel/build
-
-# Stop containers in all packages.
-docker compose --project-directory=packages/oe_bootstrap_theme stop
-docker compose --project-directory=packages/oe_whitelabel stop
-docker compose --project-directory=packages/oe_showcase stop
-```
-
-Build assets in other packages that will be symlinked.
+### Preparation
 
 ```sh
-cd packages/oe_bootstrap_theme
-docker compose up -d node
-docker compose exec -u node node npm install
-docker compose exec -u node node npm run build
-cd ../..
-
-cd packages/oe_whitelabel
-docker compose up -d node
-docker compose exec -u node node npm install
-docker compose exec -u node node npm run build
-cd ../..
+# Symlink the start script for each package.
+./setup.sh
 ```
 
-Enter the package directory.
+### Setup for a specific package
+
+Optionally, remove the `settings.php` to force a fresh Drupal install.
 
 ```sh
-cd packages/oe_showcase
+# Enter the package directory.
+cd packages/<name>
+
+# Optionally, remove settings.php to force a fresh Drupal install.
+# sudo rm build/sites/default/settings.php
+
+# Run the start script.
+./start.sh
 ```
-
-Start the container:
-
-```sh
-# Start docker-compose with a custom list of docker-compose files.
-docker compose -f docker-compose.yml -f ../../shared/docker-compose.package.yml up -d
-```
-
-Prepare `composer.mono.lock`:
-
-```sh
-cp composer.lock composer.mono.lock
-docker compose exec web composer update --no-install openeuropa/oe_whitelabel openeuropa/oe_bootstrap_theme
-```
-
-Now you can follow the instructions from [packages/oe_showcase/README.md](packages/oe_showcase/README.md):
-
-```sh
-# Install a demo website.
-docker compose exec web composer install
-docker compose exec web ./vendor/bin/run drupal:site-install
-
-# Prepare for phpunit tests.
-docker-compose exec web ./vendor/bin/run ci:site-setup
-docker-compose exec web ./vendor/bin/drush en -y oe_showcase_test
-
-# Run phpunit tests.
-docker compose exec web ./vendor/bin/phpunit
-```
-
-### Setup for oe_whitelabel
-
-Clean up and prepare `packages/oe_bootstrap_theme/` as explained for `oe_showcase` above.
-
-Enter the package directory.
-
-```sh
-cd packages/oe_whitelabel
-```
-
-Start the container as explained for `oe_showcase` above.
-
-```sh
-# Start docker-compose with a custom list of docker-compose files.
-docker compose -f docker-compose.yml -f ../../shared/docker-compose.package.yml up -d
-```
-
-Follow further instructions from [packages/oe_whitelabel/README.md](packages/oe_whitelabel/README.md).
-
-### Setup for oe_bootstrap_theme
-
-Enter the package directory.
-
-```sh
-cd packages/oe_bootstrap_theme
-```
-
-Start the container in the regular way.\
-The additional `docker-compose.package.yml` file is not needed, because `oe_bootstrap_theme` does not use other local packages. 
-
-```sh
-# Start docker-compose with a custom list of docker-compose files.
-docker compose up -d
-```
-
-Follow further instructions from [packages/oe_bootstrap_theme/README.md](packages/oe_bootstrap_theme/README.md).
-
-(There is no need for a customized docker-compose and composer setup, because no local packages need to be symlinked.)
-
-
 
 
