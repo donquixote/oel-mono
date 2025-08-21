@@ -3,3 +3,4 @@
 /vendor/
 /web/
 /packages/*/start.sh
+/packages/*/.env

@@ -14,3 +14,23 @@ git config --add remote.oe_showcase.fetch '+refs/tags/*:refs/tags/oe_showcase/*'
 ln -sf ../../shared/start-oe_showcase.sh packages/oe_showcase/start.sh
 ln -sf ../../shared/start-oe_whitelabel.sh packages/oe_whitelabel/start.sh
 ln -sf ../../shared/start-oe_bootstrap_theme.sh packages/oe_bootstrap_theme/start.sh
+
+# Create .env files with distinguishable names.
+if [ -z "$1" ]; then
+  NAME=${PWD##*/}
+else
+  NAME=$1
+fi
+
+if [ ! -f packages/oe_showcase/.env ]; then
+  echo "COMPOSE_PROJECT_NAME=oe_showcase-$NAME" > packages/oe_showcase/.env
+fi
+
+if [ ! -f packages/oe_whitelabel/.env ]; then
+  echo "COMPOSE_PROJECT_NAME=oe_whitelabel-$NAME" > packages/oe_whitelabel/.env
+fi
+
+if [ ! -f packages/oe_bootstrap_theme/.env ]; then
+  echo "COMPOSE_PROJECT_NAME=oe_bootstrap_theme-$NAME" > packages/oe_bootstrap_theme/.env
+fi
+
