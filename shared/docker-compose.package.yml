@@ -5,3 +5,6 @@ services:
       - ../../shared/composer.mono.json:/var/www/html/composer.mono.json
     environment:
       COMPOSER: composer.mono.json
+  mysql:
+    volumes:
+      - ../../volumes/${COMPOSE_PROJECT_NAME}-mysql:/var/lib/mysql
