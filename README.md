@@ -133,17 +133,12 @@ Run the setup script, if you have not already done so.
 
 ### Setup for a specific package
 
-Optionally, remove the `settings.php` to force a fresh Drupal install.
-
 ```sh
 # Enter the package directory.
 cd packages/<name>
-
-# Optionally, remove settings.php to force a fresh Drupal install.
-# sudo rm build/sites/default/settings.php
 
 # Run the start script.
 ./start.sh
 ```
 
-
+If Drupal was not already installed, this will trigger site install.

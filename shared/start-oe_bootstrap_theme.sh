@@ -9,7 +9,11 @@ docker compose exec -u node node npm run build
 
 docker compose exec web composer install
 
-if [ ! -f "build/sites/default/settings.php" ]; then
+# See if Drupal is already installed.
+docker compose exec web ./vendor/bin/drush status | grep "DB name"
+
+if [ $? -eq 1 ]; then
+  # Drupal is not installed yet.
   docker compose exec web ./vendor/bin/run drupal:site-install
 fi
 

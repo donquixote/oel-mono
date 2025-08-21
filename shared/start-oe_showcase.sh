@@ -44,7 +44,11 @@ docker compose exec web composer update --no-install openeuropa/oe_whitelabel op
 
 docker compose exec web composer install
 
-if [ ! -f "build/sites/default/settings.php" ]; then
+# See if Drupal is already installed.
+docker compose exec web ./vendor/bin/drush status | grep "DB name"
+
+if [ $? -eq 1 ]; then
+  # Drupal is not installed yet.
   docker compose exec web ./vendor/bin/run drupal:site-install
   docker-compose exec web ./vendor/bin/run ci:site-setup
   # Prepare for phpunit tests.
