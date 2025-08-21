@@ -2,8 +2,6 @@
 
 set -ex
 
-ln -sf ../../shared/docker-compose.package.yml docker-compose.override.yml
-
 # Stop containers in all packages.
 docker compose --project-directory=packages/oe_bootstrap_theme stop
 docker compose --project-directory=packages/oe_whitelabel stop

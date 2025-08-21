@@ -15,6 +15,9 @@ ln -sf ../../shared/start-oe_showcase.sh packages/oe_showcase/start.sh
 ln -sf ../../shared/start-oe_whitelabel.sh packages/oe_whitelabel/start.sh
 ln -sf ../../shared/start-oe_bootstrap_theme.sh packages/oe_bootstrap_theme/start.sh
 
+ln -sf ../../shared/docker-compose.package.yml packages/oe_whitelabel/docker-compose.override.yml
+ln -sf ../../shared/docker-compose.package.yml packages/oe_showcase/docker-compose.override.yml
+
 # Create .env files with distinguishable names.
 if [ -z "$1" ]; then
   NAME=${PWD##*/}
