@@ -8,5 +8,9 @@ services:
       - ../../shared/composer.mono.json:/var/www/html/composer.mono.json
     environment:
       COMPOSER: composer.mono.json
+  mysql:
+    volumes:
+      - mysql:/var/lib/mysql
 volumes:
   ignore:
+  mysql:
