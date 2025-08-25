@@ -2,6 +2,11 @@ services:
   web:
     volumes:
       - ../../packages:/var/packages
+      # Hide node_modules from kernel tests.
+      - ignore:/var/packages/oe_bootstrap_theme/node_modules
+      - ignore:/var/packages/oe_whitelabel/node_modules
       - ../../shared/composer.mono.json:/var/www/html/composer.mono.json
     environment:
       COMPOSER: composer.mono.json
+volumes:
+  ignore:
