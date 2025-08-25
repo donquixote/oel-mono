@@ -101,8 +101,9 @@ jobs:
           cd build/themes/contrib/oe_bootstrap_theme
           # Use the node service of the package itself.
           docker compose up -d --quiet-pull node
-          # Change ownership of ./assets/ only if it exists.
-          docker compose exec -u root -T node chown node:node . assets || true
+          # Create directories and set ownership.
+          docker compose exec -u root -T node mkdir -p node_modules assets
+          docker compose exec -u root -T node chown node:node . node_modules assets
           docker compose exec -u node -T node npm install --unsafe-perm
           docker compose exec -u node -T node npm run build
 
@@ -113,8 +114,9 @@ jobs:
           cd build/themes/contrib/oe_whitelabel
           # Use the node service of the package itself.
           docker compose up -d --quiet-pull node
-          # Change ownership of ./assets/ only if it exists.
-          docker compose exec -u root -T node chown node:node . assets || true
+          # Create directories and set ownership.
+          mkdir -p node_modules assets
+          docker compose exec -u root -T node chown node:node . node_modules assets
           docker compose exec -u node -T node npm install --unsafe-perm
           docker compose exec -u node -T node npm run build
 
@@ -122,10 +124,11 @@ jobs:
         if: hashFiles(format('packages/{0}/package.json', matrix.package)) != ''
         run: |
           set -x
-          # Change ownership of ./assets/ only if it exists.
+          # Change directory ownerships.
           # @todo Restore ownership later.
           # @todo Find something better than chown.
-          docker compose exec -u root -T node chown node:node . assets || true
+          mkdir -p node_modules assets
+          docker compose exec -u root -T node chown node:node . node_modules assets || true
           docker compose exec -u node -T node npm install --unsafe-perm
           docker compose exec -u node -T node npm run build
 
