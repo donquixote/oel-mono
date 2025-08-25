@@ -1,39 +1,39 @@
 #!/usr/bin/env sh
 
-# Add git remotes, if they do not already exist.
-git remote add oe_bootstrap_theme git@github.com:openeuropa/oe_bootstrap_theme.git || true
-git remote add oe_whitelabel git@github.com:openeuropa/oe_whitelabel.git || true
-git remote add oe_showcase git@github.com:openeuropa/oe_showcase.git || true
+set -e
 
-# Configure prefixes for tags from different remotes.
-git config --add remote.oe_bootstrap_theme.fetch '+refs/tags/*:refs/tags/oe_bootstrap_theme/*'
-git config --add remote.oe_whitelabel.fetch '+refs/tags/*:refs/tags/oe_whitelabel/*'
-git config --add remote.oe_showcase.fetch '+refs/tags/*:refs/tags/oe_showcase/*'
-
-# Create symlinks in package directories.
-ln -sf ../../shared/start-oe_showcase.sh packages/oe_showcase/start.sh
-ln -sf ../../shared/start-oe_whitelabel.sh packages/oe_whitelabel/start.sh
-ln -sf ../../shared/start-oe_bootstrap_theme.sh packages/oe_bootstrap_theme/start.sh
-
-ln -sf ../../shared/docker-compose.package.yml packages/oe_whitelabel/docker-compose.override.yml
-ln -sf ../../shared/docker-compose.package.yml packages/oe_showcase/docker-compose.override.yml
-
-# Create .env files with distinguishable names.
 if [ -z "$1" ]; then
-  NAME=${PWD##*/}
+  NAME="${PWD##*/}"
 else
-  NAME=$1
+  NAME="$1"
 fi
 
-if [ ! -f packages/oe_showcase/.env ]; then
-  echo "COMPOSE_PROJECT_NAME=oe_showcase-$NAME" > packages/oe_showcase/.env
-fi
+PACKAGES="oe_showcase oe_whitelabel oe_bootstrap_theme"
 
-if [ ! -f packages/oe_whitelabel/.env ]; then
-  echo "COMPOSE_PROJECT_NAME=oe_whitelabel-$NAME" > packages/oe_whitelabel/.env
-fi
+for PACKAGE in $PACKAGES; do
 
-if [ ! -f packages/oe_bootstrap_theme/.env ]; then
-  echo "COMPOSE_PROJECT_NAME=oe_bootstrap_theme-$NAME" > packages/oe_bootstrap_theme/.env
-fi
+  # Add git remote, if it does not already exist.
+  if ! git remote get-url "$PACKAGE" > /dev/null 2>&1; then
+    # Create the remote.
+    git remote add "$PACKAGE" "git@github.com:openeuropa/$PACKAGE.git"
+    # Configure a prefix for tags from the remote.
+    git config --add "remote.$PACKAGE.fetch" "'+refs/tags/*:refs/tags/$PACKAGE/*'"
+  fi
 
+  # Create symlinks.
+  ln -sf "../../shared/start.sh" "packages/$PACKAGE/start.sh"
+  ln -sf "../../shared/docker-compose.package.yml" "packages/$PACKAGE/docker-compose.override.yml"
+
+  # Create .env file.
+  if [ ! -f "packages/$PACKAGE/.env" ]; then
+    touch "packages/$PACKAGE/.env"
+  fi
+
+  if ! egrep -q "^COMPOSE_PROJECT_NAME=" "packages/$PACKAGE/.env"; then
+    echo "COMPOSE_PROJECT_NAME=$PACKAGE-$NAME" > packages/$PACKAGE/.env
+  fi
+
+  if ! grep -q "PACKAGE=$PACKAGE" "packages/$PACKAGE/.env"; then
+    echo "PACKAGE=$PACKAGE" >> "packages/$PACKAGE/.env"
+  fi
+done
