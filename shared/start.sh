@@ -88,17 +88,34 @@ else
 fi
 
 # Sometimes Drupal is not immediately ready.
-sleep 1
+DRUPAL_STATUS=1  # waiting.
+for _ in $(seq 1 10); do
+  if docker compose exec web ./vendor/bin/drush status | grep -qE "^Drupal bootstrap *: *Successful *$"; then
+    DRUPAL_STATUS=0  # installed.
+    break
+  fi
+  if ! docker compose exec web ./vendor/bin/drush status | grep -qE "^DB name *:"; then
+    DRUPAL_STATUS=2  # not installed.
+    break
+  fi
+  sleep 1
+done
 
 # See if Drupal is already installed.
-if docker compose exec web ./vendor/bin/drush status | egrep -q "^Database *: *Connected *$"; then
+if [ $DRUPAL_STATUS -eq 0 ]; then
   echo "Drupal is already installed."
   docker compose exec web ./vendor/bin/drush uli
 else
-  echo "Drupal is not installed yet."
-  echo "Next steps:"
+  if [ $DRUPAL_STATUS -eq 1 ]; then
+    echo "A Drupal installation was found, but it seems to be not working."
+    docker compose exec web ./vendor/bin/drush status
+    echo ""
+    echo "Next steps to reinstall Drupal:"
+  else
+    echo "Drupal is not installed yet."
+    echo "Next steps to install Drupal:"
+  fi
   echo ""
-  echo "docker compose exec web ./vendor/bin/drush status"
   echo "docker compose exec web ./vendor/bin/run drupal:site-install"
   # Drupal is not installed yet.
   #docker compose exec web ./vendor/bin/run drupal:site-install
