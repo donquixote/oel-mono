@@ -117,6 +117,7 @@ else
   fi
   echo ""
   echo "docker compose exec web ./vendor/bin/run drupal:site-install"
+  echo "docker compose exec web ./vendor/bin/drush pmu -y update"
   # Drupal is not installed yet.
   #docker compose exec web ./vendor/bin/run drupal:site-install
   if [ "$PACKAGE" = "oe_showcase" ]; then
