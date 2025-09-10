@@ -3,7 +3,7 @@
 set -e
 
 PACKAGE="${PWD##*/}"
-PACKAGES="oe_showcase oe_whitelabel oe_bootstrap_theme"
+PACKAGES="oe_bootstrap_theme oe_whitelabel oe_showcase"
 SUBDIR_NAMES="vendor build"
 
 # Stop and clean up  other packages.
