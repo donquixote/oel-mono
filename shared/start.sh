@@ -124,6 +124,9 @@ else
   # Drupal is not installed yet.
   #docker compose exec web ./vendor/bin/run drupal:site-install
   if [ "$PACKAGE" = "oe_showcase" ]; then
+    echo ""
+    echo "Additional steps, if you want to run phpunit tests:"
+    echo ""
     echo "docker compose exec web ./vendor/bin/run ci:site-setup"
     # Prepare for phpunit tests.
     echo "docker compose exec web ./vendor/bin/drush en -y oe_showcase_test"

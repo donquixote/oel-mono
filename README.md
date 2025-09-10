@@ -141,4 +141,4 @@ cd packages/<name>
 ./start.sh
 ```
 
-If Drupal was not already installed, this will trigger site install.
+Afterwards, follow instructions from the script to install Drupal.
