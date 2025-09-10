@@ -54,14 +54,14 @@ for OTHER_PACKAGE in $PACKAGES; do
   cd "../$PACKAGE"
 done
 
-# Start containers in this package.
-docker compose up -d
-
 # Build assets in relevant packages.
 for ASSETS_PACKAGE in $PACKAGES; do
   if [ ! -f "../$ASSETS_PACKAGE/package.json" ]; then
     continue
   fi
+  # Create empty node_modules directory, before the main web container is started.
+  # Otherwise the directory will be created with the root permissions and it won't be writable.
+  mkdir -p ../$ASSETS_PACKAGE/node_modules
   if [ "$PACKAGE" = "oe_bootstrap_theme" ] && [ "$ASSETS_PACKAGE" = "oe_whitelabel" ]; then
     continue
   fi
@@ -75,6 +75,9 @@ for ASSETS_PACKAGE in $PACKAGES; do
     cd ../$PACKAGE
   fi
 done
+
+# Start containers in this package.
+docker compose up -d
 
 # Install Composer dependencies.
 if [ -f vendor/composer/installed.json ]; then
