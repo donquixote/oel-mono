@@ -44,30 +44,13 @@ jobs:
         run: |
           set -x
           # Set the php version in docker-compose.yml.
-          sed -i -e 's/httpd-php:8.[0-9]-dev/httpd-php:${{ matrix.php }}-dev/g' docker-compose.yml
+          sed -i -e 's/httpd-php:8.[0-9]-dev/httpd-php:${{ matrix.php }}-ci/g' docker-compose.yml
           # Report what was changed.
           git diff
 
       - name: Start docker compose
         run: |
           docker compose -f docker-compose.yml -f ../../shared/docker-compose.package.yml up -d --quiet-pull
-
-      - name: Disable xdebug
-        run: |
-          set -x
-
-          # Report before.
-          docker compose exec -T web php --version
-          docker compose exec -T web php --info | grep xdebug.mode
-
-          # Disable xdebug.
-          docker compose exec -T web phpdismod xdebug
-          # Restart the web server.
-          docker compose exec -T web /etc/init.d/php${{ matrix.php }}-fpm restart
-
-          # Report after.
-          docker compose exec -T web php --version
-          docker compose exec -T web php --info | grep xdebug.mode || true
 
       - name: Prepare composer.mono.lock (oe_showcase only)
         if: hashFiles(format('packages/{0}/composer.lock', matrix.package)) != ''
