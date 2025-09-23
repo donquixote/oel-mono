@@ -11,8 +11,8 @@
             "url": "../../packages/*",
             "options": {
                 "versions": {
-                    "openeuropa/oe_whitelabel": "1.999.0",
-                    "openeuropa/oe_bootstrap_theme": "1.999.0"
+                    "openeuropa/oe_whitelabel": "0.4016.202509230410",
+                    "openeuropa/oe_bootstrap_theme": "0.4016.202509230008"
                 }
             }
         }

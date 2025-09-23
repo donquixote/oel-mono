@@ -11,6 +11,9 @@ default:
   title:
     -
       value: 'Dropdown link'
+  description:
+    -
+      value: 'This is a description for this submenu. '
   menu_name:
     -
       value: main

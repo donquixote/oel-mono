@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: bdc3db02-2a0b-4122-aa21-63d79d0e9843
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    a2fe6923-60bf-49b7-b2d9-cdb47f0dbb5b: menu_link_content
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Link 2'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      uri: 'internal:/example/link-2'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: 1
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:a2fe6923-60bf-49b7-b2d9-cdb47f0dbb5b'
+  revision_translation_affected:
+    -
+      value: true
